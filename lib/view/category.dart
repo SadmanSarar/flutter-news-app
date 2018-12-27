@@ -20,8 +20,8 @@ class _CategoryPageState extends State<CategoryPage> {
   CategoryRepository repository = CategoryRepository.create();
   _CategoryPageState() {}
 
-  void fetchData() {
-    repository.fetchAndGet().then((value) {
+  Future<Null> fetchData() {
+    return repository.fetchAndGet().then((value) {
       setState(() {
         _list = value;
       });
@@ -53,36 +53,37 @@ class _CategoryPageState extends State<CategoryPage> {
     var size = MediaQuery.of(context).size;
     final double itemWidth = size.width / 3;
     final double itemHeight = 170;
-
-    return SmartRefresher(
-      enablePullDown: true,
-      onRefresh: (up) {
-        // fetchData();
-        _refreshController.sendBack(true, RefreshStatus.idle);
-        setState(() {});
-      },
-      controller: _refreshController,
-      enableOverScroll: true,
-      child: GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: itemWidth / itemHeight,
-        shrinkWrap: true,
-        children: List.generate(
-          _list.length,
-          (index) {
-            print(_list[index].imageUrl);
-            return new CategoryItem(
-              _list[index].id,
-              _list[index].name,
-              (_list[index].imageUrl == null || _list[index].imageUrl.isEmpty)
-                  ? 'https://picsum.photos/200/200'
-                  : URL.imageUrl(_list[index].imageUrl),
-              _colorList[index % _colorList.length],
-              (id) {
-                print('Clicked with Id: $id');
+    final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+        GlobalKey<RefreshIndicatorState>();
+    return Container(
+      child: RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: fetchData,
+        child: Container(
+          height: size.height,
+          child: GridView.count(
+            crossAxisCount: 3,
+            childAspectRatio: itemWidth / itemHeight,
+            shrinkWrap: true,
+            children: List.generate(
+              _list.length,
+              (index) {
+                print(_list[index].imageUrl);
+                return new CategoryItem(
+                  _list[index].id,
+                  _list[index].name,
+                  (_list[index].imageUrl == null ||
+                          _list[index].imageUrl.isEmpty)
+                      ? 'https://picsum.photos/200/200'
+                      : URL.imageUrl(_list[index].imageUrl),
+                  _colorList[index % _colorList.length],
+                  (id) {
+                    print('Clicked with Id: $id');
+                  },
+                );
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );
