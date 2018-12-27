@@ -15,8 +15,34 @@ class NewsRepository {
   }
 
   Future<List<News>> fetchAndGet() async {
-    var categories = remoteService.fetchNews('1234');
-    var data = await categories;
+    var future = remoteService.fetchNews(
+      '1234',
+      '',
+      '',
+    );
+    return await fetchNews(future);
+  }
+
+  Future<List<News>> fetchNewsType(String type) async {
+    var future = remoteService.fetchNews(
+      '1234',
+      type,
+      '',
+    );
+    return await fetchNews(future);
+  }
+
+  Future<List<News>> fetchNewsCategory(int categoryId) async {
+    var future = remoteService.fetchNews(
+      '1234',
+      '',
+      categoryId.toString(),
+    );
+    return await fetchNews(future);
+  }
+
+  fetchNews(Future<List<News>> future) async {
+    var data = await future;
     var database = await AppDatabase.openMyDatabase();
     database.deleteAllNews();
     data.forEach((item) {
@@ -31,10 +57,6 @@ class NewsRepository {
         item.publishedAt,
         item.categoryName,
       );
-    });
-    var dummy = await database.getAllNews();
-    dummy.forEach((item) {
-      print(item.toString());
     });
     return database.getAllNews();
   }
