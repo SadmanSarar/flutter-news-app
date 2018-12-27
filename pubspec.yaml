@@ -26,17 +26,14 @@ dependencies:
   flutter_youtube: "^1.1.4"
   vibration: 1.0.1
   http: any
-
-
-
-
-
-
-
+  tinano: ^0.1.1
 
 dev_dependencies:
+  tinano_generator:
+  build_runner:
   flutter_test:
     sdk: flutter
+  
 
 
 # For information on the generic Dart part of this file, see the

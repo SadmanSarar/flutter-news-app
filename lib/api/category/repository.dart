@@ -1,4 +1,7 @@
 import 'service.dart';
+import '../../database/appDataBase.dart';
+import 'dart:async';
+import '../category/model.dart';
 
 class CategoryRepository {
   CategoryRemoteService remoteService;
@@ -11,13 +14,18 @@ class CategoryRepository {
     );
   }
 
-  void fetchAndGet() {
+  Future<List<Category>> fetchAndGet() async {
     var categories = remoteService.fetchCategory('1234');
-
-    categories.then((data) {
-      data.forEach((item) {
-        print(item.name);
-      });
+    var data = await categories;
+    var database = await AppDatabase.openMyDatabase();
+    database.deleteAllCategory();
+    data.forEach((item) {
+      database.createCategory(
+        item.name,
+        item.imageUrl,
+        item.description,
+      );
     });
+    return database.getAllCategory();
   }
 }

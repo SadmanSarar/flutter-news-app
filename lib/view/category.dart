@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'categoryItem.dart';
+import '../api/category/repository.dart';
+import '../api/category/model.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -8,8 +10,22 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   @override
-  // TODO: implement context
   BuildContext get context => super.context;
+
+  List<Category> _list = [];
+  CategoryRepository repository = CategoryRepository.create();
+  _CategoryPageState() {
+    repository.fetchAndGet().then((value) {
+      setState(() {
+        _list = value;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   final List<Color> _colorList = [
     Colors.blue,
@@ -30,13 +46,13 @@ class _CategoryPageState extends State<CategoryPage> {
         childAspectRatio: itemWidth / itemHeight,
         shrinkWrap: true,
         children: List.generate(
-          10,
+          _list.length,
           (index) {
             return new CategoryItem(
-              index,
-              'Item $index',
+              _list[index].id,
+              _list[index].name,
               'https://picsum.photos/200/200',
-              _colorList[index%_colorList.length],
+              _colorList[index % _colorList.length],
               (id) {
                 print('Clicked with Id: $id');
               },
