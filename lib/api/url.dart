@@ -9,4 +9,8 @@ class URL {
     });
     return url;
   }
+
+  static String imageUrl(String imgUrl) {
+    return 'http://news-app.sadmansarar.xyz/storage/' + imgUrl;
+  }
 }

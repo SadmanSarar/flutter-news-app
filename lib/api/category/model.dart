@@ -2,6 +2,7 @@ import 'package:tinano/tinano.dart';
 
 @row
 class Category {
+  
   final int id;
   final String name;
   final String imageUrl;
@@ -16,9 +17,14 @@ class Category {
         item['id'],
         item['name'],
         item['image'],
-        json['description'],
+        item['description'],
       );
     }).toList();
     return list;
+  }
+
+  @override
+  String toString() {
+    return 'id: $id; name: $name; image: $imageUrl; description: $description';
   }
 }

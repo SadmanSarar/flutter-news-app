@@ -17,14 +17,14 @@ abstract class AppDatabase {
   Future<int> deleteAllCategory();
 
   @Insert(
-    "INSERT INTO categories (name,image,description) VALUES (:name,:image,:description)",
+    "INSERT INTO categories (name,imageUrl,description) VALUES (:name,:image,:description)",
   )
   Future<int> createCategory(String name, String image, String description);
 
   static Future<AppDatabase> openMyDatabase() async {
     return await (AppDatabase.createBuilder().doOnCreate((db, version) async {
       await db.execute("""
-        CREATE TABLE `categories` ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `image` TEXT  NULL, `description` TEXT  NULL );
+        CREATE TABLE `categories` ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `imageUrl` TEXT  NULL, `description` TEXT  NULL );
         """);
     }).build());
   }

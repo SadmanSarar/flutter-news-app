@@ -26,6 +26,10 @@ class CategoryRepository {
         item.description,
       );
     });
+    var dummy = await database.getAllCategory();
+    dummy.forEach((item){
+      print(item.toString());
+    }); 
     return database.getAllCategory();
   }
 }

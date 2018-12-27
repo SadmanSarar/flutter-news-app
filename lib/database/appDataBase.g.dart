@@ -55,7 +55,7 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
   Future<int> createCategory(
       String name, String image, String description) async {
     String sql =
-        "INSERT INTO categories (name,image,description) VALUES (?,?,?)";
+        "INSERT INTO categories (name,imageUrl,description) VALUES (?,?,?)";
 
     final bindParams_0 = name;
     final bindParams_1 = image;

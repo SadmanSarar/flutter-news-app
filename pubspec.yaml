@@ -27,6 +27,8 @@ dependencies:
   vibration: 1.0.1
   http: any
   tinano: ^0.1.1
+  pull_to_refresh: ^1.1.6
+
 
 dev_dependencies:
   tinano_generator:
