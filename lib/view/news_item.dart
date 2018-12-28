@@ -3,6 +3,7 @@ import 'package:transparent_image/transparent_image.dart';
 import 'news_details.dart';
 import '../api/news/model.dart';
 import '../api/url.dart';
+import 'package:html/parser.dart';
 
 typedef NewsItemCallback = Function(int id);
 
@@ -71,7 +72,7 @@ class NewsListItem extends StatelessWidget {
                     bottom: 4.0,
                   ),
                   child: Text(
-                    news.body,
+                    _parseHtmlString(news.body),
                     style: TextStyle(color: Colors.black87, fontSize: 16.0),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -83,5 +84,13 @@ class NewsListItem extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  String _parseHtmlString(String htmlString) {
+    var document = parse(htmlString);
+
+    String parsedString = parse(document.body.text).documentElement.text;
+
+    return parsedString;
   }
 }

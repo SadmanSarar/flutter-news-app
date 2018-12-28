@@ -4,7 +4,6 @@ import 'dashboard.dart';
 import 'favourite.dart';
 import 'video.dart';
 import 'profile.dart';
-import '../api/category/repository.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -90,15 +89,6 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
       ),
       body: viewForIndex(_navIndex),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          CategoryRepository categories = CategoryRepository.create();
-          categories.fetchAndGet();
-        },
-        elevation: 4.0,
-        child: Icon(Icons.favorite),
-        isExtended: true,
-      ),
     );
   }
 }
