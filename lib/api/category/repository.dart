@@ -21,6 +21,7 @@ class CategoryRepository {
     database.deleteAllCategory();
     data.forEach((item) {
       database.createCategory(
+        item.id,
         item.name,
         item.imageUrl,
         item.description,

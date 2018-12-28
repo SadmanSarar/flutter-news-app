@@ -53,15 +53,16 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
   }
 
   Future<int> createCategory(
-      String name, String image, String description) async {
+      int id, String name, String image, String description) async {
     String sql =
-        "INSERT INTO categories (name,imageUrl,description) VALUES (?,?,?)";
+        "INSERT INTO categories (id,name,imageUrl,description) VALUES (?,?,?,?)";
 
-    final bindParams_0 = name;
-    final bindParams_1 = image;
-    final bindParams_2 = description;
+    final bindParams_0 = id;
+    final bindParams_1 = name;
+    final bindParams_2 = image;
+    final bindParams_3 = description;
 
-    final bindArgs = [bindParams_0, bindParams_1, bindParams_2];
+    final bindArgs = [bindParams_0, bindParams_1, bindParams_2, bindParams_3];
 
     int lastInsertedRecordId = await database.rawInsert(sql, bindArgs);
 
@@ -104,12 +105,66 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
     return parsedResults;
   }
 
+  Future<List<News>> getAllNewsByType(String type) async {
+    String sql = "SELECT * FROM news where type = ?";
+
+    final bindParams_0 = type;
+
+    final bindArgs = [bindParams_0];
+
+    final rows = await database.rawQuery(sql, bindArgs);
+
+    final parsedResults = new List<News>();
+    rows.forEach((row) {
+      News parsedRow = new News(
+          row["id"] as int,
+          row["title"] as String,
+          row["body"] as String,
+          row["image"] as String,
+          row["categoryId"] as int,
+          row["type"] as String,
+          row["published"] as int,
+          row["publishedAt"] as String,
+          row["categoryName"] as String);
+      parsedResults.add(parsedRow);
+    });
+    return parsedResults;
+  }
+
   Future<List<News>> getAllNewsForCategory(int categoryId) async {
     String sql = "SELECT * FROM news where categoryId = ?";
 
     final bindParams_0 = categoryId;
 
     final bindArgs = [bindParams_0];
+
+    final rows = await database.rawQuery(sql, bindArgs);
+
+    final parsedResults = new List<News>();
+    rows.forEach((row) {
+      News parsedRow = new News(
+          row["id"] as int,
+          row["title"] as String,
+          row["body"] as String,
+          row["image"] as String,
+          row["categoryId"] as int,
+          row["type"] as String,
+          row["published"] as int,
+          row["publishedAt"] as String,
+          row["categoryName"] as String);
+      parsedResults.add(parsedRow);
+    });
+    return parsedResults;
+  }
+
+  Future<List<News>> getAllNewsForCategoryAndType(
+      int categoryId, String type) async {
+    String sql = "SELECT * FROM news where categoryId = ? and type = ?";
+
+    final bindParams_0 = categoryId;
+    final bindParams_1 = type;
+
+    final bindArgs = [bindParams_0, bindParams_1];
 
     final rows = await database.rawQuery(sql, bindArgs);
 

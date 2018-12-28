@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
+import '../api/category/model.dart';
+import '../api/url.dart';
 
-typedef CategoryCallback = void Function(int id);
+typedef CategoryCallback = void Function(Category category);
 
 class CategoryItem extends StatelessWidget {
-  final String title;
-  final String imgUrl;
-  final int id;
+  final Category category;
   final Color color;
   final CategoryCallback callback;
   const CategoryItem(
-    this.id,
-    this.title,
-    this.imgUrl,
+    this.category,
     this.color,
     this.callback, {
     Key key,
@@ -24,7 +22,7 @@ class CategoryItem extends StatelessWidget {
       color: color,
       child: InkWell(
         onTap: () {
-          callback(id);
+          callback(category);
         },
         child: Column(
           children: <Widget>[
@@ -36,14 +34,14 @@ class CategoryItem extends StatelessWidget {
               ),
               child: FadeInImage.memoryNetwork(
                 placeholder: kTransparentImage,
-                image: imgUrl,
+                image: URL.imageUrl(category.imageUrl),
                 fit: BoxFit.contain,
                 height: 120,
                 width: 120,
               ),
             ),
             Text(
-              title,
+              category.name,
               style: buildHeadline(context),
             )
           ],

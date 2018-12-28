@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'news_details.dart';
+import '../api/news/model.dart';
+import '../api/url.dart';
 
-typedef DashBoardItemCallback = Function(int id);
+typedef NewsItemCallback = Function(int id);
 
-class DashBoardItem extends StatelessWidget {
-  final String imgUrl;
-  final String title;
-  final String body;
-  final int id;
-  final DashBoardItemCallback callback;
+class NewsListItem extends StatelessWidget {
+  final News news;
+  final NewsItemCallback callback;
 
-  const DashBoardItem(
-    this.title,
-    this.body,
-    this.imgUrl,
-    this.id,
+  const NewsListItem(
+    this.news,
     this.callback, {
     Key key,
   }) : super(key: key);
@@ -28,9 +24,9 @@ class DashBoardItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NewsDetails()),
+            MaterialPageRoute(builder: (context) => NewsDetails(news)),
           );
-          callback(id);
+          callback(news.id);
         },
         child: Column(
           children: <Widget>[
@@ -47,7 +43,7 @@ class DashBoardItem extends StatelessWidget {
                     ),
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image: imgUrl,
+                      image: URL.imageUrl(news.image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -60,7 +56,7 @@ class DashBoardItem extends StatelessWidget {
                     bottom: 4.0,
                   ),
                   child: Text(
-                    title,
+                    news.title,
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -75,7 +71,7 @@ class DashBoardItem extends StatelessWidget {
                     bottom: 4.0,
                   ),
                   child: Text(
-                    body,
+                    news.body,
                     style: TextStyle(color: Colors.black87, fontSize: 16.0),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,

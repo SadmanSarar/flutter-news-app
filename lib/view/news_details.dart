@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
-import 'package:vibration/vibration.dart';
+import '../api/news/model.dart';
+import '../api/url.dart';
 
 class NewsDetails extends StatefulWidget {
-  NewsDetails({Key key}) : super(key: key);
-
+  News news;
+  NewsDetails(this.news);
   @override
-  _NewsDetailsState createState() => _NewsDetailsState(0);
+  _NewsDetailsState createState() => _NewsDetailsState(news);
 }
 
 class _NewsDetailsState extends State<NewsDetails> {
   String _title;
   String _body;
   String _imgUrl;
-  final int _id;
-
   final FlutterYoutube youtube = FlutterYoutube();
 
-  _NewsDetailsState(this._id) {
-    _title = 'Somehting';
-    _body = '<h1>Somehting</h1>';
-    _imgUrl =
-        "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350";
+  _NewsDetailsState(News news) {
+    _title = news.title;
+    _body = news.body;
+    _imgUrl = URL.imageUrl(news.image);
   }
 
   @override

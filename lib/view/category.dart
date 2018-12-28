@@ -4,6 +4,7 @@ import '../api/category/repository.dart';
 import '../api/category/model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../api/url.dart';
+import 'category_details.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -68,17 +69,18 @@ class _CategoryPageState extends State<CategoryPage> {
             children: List.generate(
               _list.length,
               (index) {
-                print(_list[index].imageUrl);
+                var item = _list[index];
                 return new CategoryItem(
-                  _list[index].id,
-                  _list[index].name,
-                  (_list[index].imageUrl == null ||
-                          _list[index].imageUrl.isEmpty)
-                      ? 'https://picsum.photos/200/200'
-                      : URL.imageUrl(_list[index].imageUrl),
+                  item,
                   _colorList[index % _colorList.length],
-                  (id) {
-                    print('Clicked with Id: $id');
+                  (category) {
+                    print('CategoryId: ${category.id}');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryDetails(category),
+                      ),
+                    );
                   },
                 );
               },

@@ -14,7 +14,6 @@ class NewsRemoteService {
       'type': type,
       'category_id': categoryId,
     });
-    print(url);
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

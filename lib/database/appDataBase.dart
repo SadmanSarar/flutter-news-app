@@ -18,9 +18,9 @@ abstract class AppDatabase {
   Future<int> deleteAllCategory();
 
   @Insert(
-    "INSERT INTO categories (name,imageUrl,description) VALUES (:name,:image,:description)",
+    "INSERT INTO categories (id,name,imageUrl,description) VALUES (:id,:name,:image,:description)",
   )
-  Future<int> createCategory(String name, String image, String description);
+  Future<int> createCategory(int id,String name, String image, String description);
 
   /**
    * NEWS
@@ -31,8 +31,14 @@ abstract class AppDatabase {
   @Query("SELECT * FROM news")
   Future<List<News>> getAllNews();
 
+  @Query("SELECT * FROM news where type = :type")
+  Future<List<News>> getAllNewsByType(String type);
+
   @Query("SELECT * FROM news where categoryId = :categoryId")
   Future<List<News>> getAllNewsForCategory(int categoryId);
+
+  @Query("SELECT * FROM news where categoryId = :categoryId and type = :type")
+  Future<List<News>> getAllNewsForCategoryAndType(int categoryId, String type);
 
   @Query('Delete from news')
   Future<int> deleteAllNews();

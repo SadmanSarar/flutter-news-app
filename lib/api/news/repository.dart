@@ -14,37 +14,18 @@ class NewsRepository {
     );
   }
 
-  Future<List<News>> fetchAndGet() async {
-    var future = remoteService.fetchNews(
-      '1234',
-      '',
-      '',
-    );
-    return await fetchNews(future);
-  }
-
-  Future<List<News>> fetchNewsType(String type) async {
+  Future<List<News>> fetchAndGet(String type, String categoryId) async {
     var future = remoteService.fetchNews(
       '1234',
       type,
-      '',
+      categoryId,
     );
-    return await fetchNews(future);
+    return await fetchNews(future, type, categoryId);
   }
 
-  Future<List<News>> fetchNewsCategory(int categoryId) async {
-    var future = remoteService.fetchNews(
-      '1234',
-      '',
-      categoryId.toString(),
-    );
-    return await fetchNews(future);
-  }
-
-  fetchNews(Future<List<News>> future) async {
+  fetchNews(Future<List<News>> future, String type, String categoryId) async {
     var data = await future;
     var database = await AppDatabase.openMyDatabase();
-    database.deleteAllNews();
     data.forEach((item) {
       database.createNews(
         item.id,
@@ -58,6 +39,16 @@ class NewsRepository {
         item.categoryName,
       );
     });
-    return database.getAllNews();
+    if (type.isEmpty && categoryId.isEmpty) {
+      return database.getAllNews();
+    }
+    if (type.isNotEmpty && categoryId.isNotEmpty) {
+      return database.getAllNewsForCategoryAndType(int.parse(categoryId), type);
+    }
+    if (type.isNotEmpty) {
+      return database.getAllNewsByType(type);
+    } else {
+      return database.getAllNewsForCategory(int.parse(categoryId));
+    }
   }
 }

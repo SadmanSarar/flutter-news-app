@@ -8,7 +8,6 @@ class CategoryRemoteService {
     var url = URL.addQuery(URL.category, {
       'api_token': apiToken,
     });
-    print(url);
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
