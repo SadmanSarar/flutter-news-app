@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'view/home.dart';
+import 'view/splashscreen.dart';
 import 'package:flutter_stetho/flutter_stetho.dart';
 
 void main() {
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.red,
         backgroundColor: Colors.amber,
       ),
-      home: HomePage(title: 'Flutter Demo Home Page'),
+      // home: HomePage(title: 'Flutter Demo Home Page'),
+      home: SplashScreen(),
       showPerformanceOverlay: false,
     );
   }

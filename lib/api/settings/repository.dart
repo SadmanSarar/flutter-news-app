@@ -27,4 +27,14 @@ class SettingRepository {
     var pref = await prefs;
     return pref.getString('privacyPolicy');
   }
+
+  Future<String> getApiToken() async {
+    var pref = await prefs;
+    return pref.getString('apiToken');
+  }
+
+  Future<bool> saveApiToken(String apiToken) async {
+    var pref = await prefs;
+    return pref.setString('apiToken', apiToken);
+  }
 }
