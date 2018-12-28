@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'home.dart';
+import 'login.dart';
 import 'package:flutter/material.dart';
 import '../api/settings/repository.dart';
 
@@ -55,7 +56,7 @@ class SplashScreen extends StatelessWidget {
   Future _gotoNextScreen(BuildContext context) async {
     var apiToken = await settingRepository.getApiToken();
 
-    Widget destination = (apiToken==null || apiToken.isEmpty) ? HomePage() : HomePage();
+    Widget destination = (apiToken==null || apiToken.isEmpty) ? LoginPage() : HomePage();
 
     Navigator.pushReplacement(
         context,

@@ -37,4 +37,10 @@ class SettingRepository {
     var pref = await prefs;
     return pref.setString('apiToken', apiToken);
   }
+
+  Future<String> login(String text, String text2) {
+    return Future.delayed(Duration(seconds: 2), () {
+      return 'Oka';
+    });
+  }
 }
