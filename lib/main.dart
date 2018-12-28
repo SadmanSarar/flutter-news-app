@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'view/home.dart';
+import 'package:flutter_stetho/flutter_stetho.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  Stetho.initialize();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,7 +20,6 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(title: 'Flutter Demo Home Page'),
       showPerformanceOverlay: false,
-
     );
   }
 }

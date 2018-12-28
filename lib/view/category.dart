@@ -3,7 +3,6 @@ import 'categoryItem.dart';
 import '../api/category/repository.dart';
 import '../api/category/model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../api/url.dart';
 import 'category_details.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -75,8 +74,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   _colorList[index % _colorList.length],
                   (category) {
                     print('CategoryId: ${category.id}');
-                    Navigator.push(
-                      context,
+                    Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => CategoryDetails(category),
                       ),
