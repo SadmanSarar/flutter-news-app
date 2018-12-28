@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../api/settings/service.dart';
 import 'privacy_policy.dart';
+import 'package:launch_review/launch_review.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -85,19 +88,25 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 new ProfileMenu(
-                  "Rate",
-                  "Give your rate and feedback",
-                  Icons.rate_review,
-                ),
+                    "Rate", "Give your rate and feedback", Icons.rate_review,
+                    callback: () {
+                  LaunchReview.launch();
+                }),
                 new ProfileMenu(
                   "More",
                   "More Apps from developer",
                   Icons.more,
+                  callback: () {
+                    _launchURL('http://sadmansarar.xzy');
+                  },
                 ),
                 new ProfileMenu(
                   "About",
                   '',
                   Icons.info,
+                  callback: () {
+                    _launchURL('http://sadmansarar.xzy');
+                  },
                 ),
               ],
             ),
@@ -105,6 +114,20 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Fluttertoast.showToast(
+          msg: "Cannot launch URL. Visit: sadmansarar.xyz",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 2,
+          backgroundColor: Colors.black87,
+          textColor: Colors.white);
+    }
   }
 }
 
