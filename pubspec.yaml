@@ -29,6 +29,8 @@ dependencies:
   tinano: ^0.1.1
   pull_to_refresh: ^1.1.6
   flutter_stetho: ^0.2.2
+  shared_preferences: ^0.4.3
+
 
 
 dev_dependencies:

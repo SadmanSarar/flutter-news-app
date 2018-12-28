@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../api/settings/service.dart';
+import 'privacy_policy.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    SettingRemoteService().fetchSettings('1234');
     return Container(
       padding: EdgeInsets.all(8.0),
       child: Column(
@@ -73,6 +76,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   "Privacy Policy",
                   "App Terms and Policy",
                   Icons.lock,
+                  callback: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PrivacyPolicy(),
+                      ),
+                    );
+                  },
                 ),
                 new ProfileMenu(
                   "Rate",
@@ -102,24 +112,25 @@ class ProfileMenu extends StatelessWidget {
   final IconData _iconData;
   final String _title;
   final String _subTitle;
-  const ProfileMenu(
-    this._title,
-    this._subTitle,
-    this._iconData, {
-    Key key,
-  }) : super(key: key);
+  final GestureTapCallback callback;
+  const ProfileMenu(this._title, this._subTitle, this._iconData,
+      {Key key, this.callback})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: callback,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: <Widget>[
             Padding(
               padding: EdgeInsets.all(16.0),
-              child: Icon(_iconData,color: Colors.black87,),
+              child: Icon(
+                _iconData,
+                color: Colors.black87,
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,10 +143,12 @@ class ProfileMenu extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0),
                 ),
-                _subTitle.isNotEmpty ? Text(
-                  _subTitle,
-                  style: TextStyle(color: Colors.black54),
-                ) : Container(),
+                _subTitle.isNotEmpty
+                    ? Text(
+                        _subTitle,
+                        style: TextStyle(color: Colors.black54),
+                      )
+                    : Container(),
               ],
             ),
           ],
