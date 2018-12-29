@@ -1,8 +1,10 @@
 class URL {
   static String baseUrl = "http://news-app.sadmansarar.xyz";
+  // static String baseUrl = "http://192.168.1.116:8000";
   static String category = baseUrl + '/api/category';
   static String news = baseUrl + '/api/news';
   static String settings = baseUrl + '/api/settings';
+  static String login = baseUrl + '/api/auth/login';
 
   static String addQuery(String url, Map<String, String> query) {
     url = url + '?';

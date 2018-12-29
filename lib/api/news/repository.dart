@@ -2,21 +2,25 @@ import 'service.dart';
 import '../../database/appDataBase.dart';
 import 'dart:async';
 import 'model.dart';
+import '../settings/repository.dart';
 
 class NewsRepository {
   NewsRemoteService remoteService;
 
-  NewsRepository(this.remoteService);
+  SettingRepository settings;
+  NewsRepository(this.remoteService, this.settings);
 
   factory NewsRepository.create() {
     return NewsRepository(
       NewsRemoteService(),
+      SettingRepository.create(),
     );
   }
 
   Future<List<News>> fetchAndGet(String type, String categoryId) async {
+    var apiToken = await settings.getApiToken();
     var future = remoteService.fetchNews(
-      '1234',
+      apiToken,
       type,
       categoryId,
     );

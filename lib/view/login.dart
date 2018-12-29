@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'home.dart';
 import 'package:flutter/material.dart';
-import '../api/settings/repository.dart';
+import '../api/auth/service.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,20 +11,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final SettingRepository settingRepository = SettingRepository.create();
-
-  final emailController = TextEditingController(text: '');
-  final passwordController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
   @override
   void initState() {
+    emailController = TextEditingController(text: '');
+    passwordController = TextEditingController(text: '');
     super.initState();
   }
 
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
-    emailController.dispose();
-    passwordController.dispose();
+    // emailController.dispose();
+    // passwordController.dispose();
     super.dispose();
   }
 
@@ -127,10 +127,22 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login(BuildContext context) {
-    settingRepository
+    AuthRemoteService authRemoteService = AuthRemoteService.create();
+    authRemoteService
         .login(emailController.text, passwordController.text)
         .then((value) {
+      if (value.status == Status.ERROR) {
+        Navigator.of(context).pop();
+        _showMessageDialog('Error', value.message);
+        return;
+      }
       _gotoNextScreen(context);
+
+      // _gotoNextScreen(context);
+    }).catchError((e, s) {
+      print(e);
+      Navigator.of(context).pop();
+      _showMessageDialog('Error', 'Something went wrong');
     });
   }
 
