@@ -3,6 +3,8 @@ import '../../database/appDataBase.dart';
 import 'dart:async';
 import 'model.dart';
 import '../settings/repository.dart';
+import '../../events/eventbus.dart';
+import '../../events/models.dart';
 
 class NewsRepository {
   NewsRemoteService remoteService;
@@ -76,19 +78,22 @@ class NewsRepository {
         news.published,
         news.publishedAt,
         news.categoryName);
+
+    eventBus.fire(new FavNewsUpdateEvent());
   }
 
   removeFavNews(News news) async {
     var database = await AppDatabase.openMyDatabase();
     database.deleteFavNews(news.id);
+    eventBus.fire(new FavNewsUpdateEvent());
   }
 
   Future<bool> isFavouriteNews(int id) async {
     var database = await AppDatabase.openMyDatabase();
     var news = await database.getFavNewsById(id);
-    if(news == null){
+    if (news == null) {
       return false;
-    }else {
+    } else {
       return true;
     }
   }

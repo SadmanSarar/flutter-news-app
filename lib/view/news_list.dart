@@ -3,6 +3,8 @@ import 'news_item.dart';
 import '../api/news/repository.dart';
 import '../api/news/model.dart';
 import '../api/url.dart';
+import '../events/eventbus.dart';
+import '../events/models.dart';
 
 class NewsList extends StatefulWidget {
   final String type;
@@ -26,7 +28,13 @@ class _NewsListState extends State<NewsList> {
   bool _loading = false;
   final String type;
   final String categoryId;
-  _NewsListState(this.type, this.categoryId);
+  _NewsListState(this.type, this.categoryId) {
+    if (type == 'fav') {
+      eventBus.on<FavNewsUpdateEvent>().listen((event) {
+        fetchData();
+      });
+    }
+  }
 
   Future<dynamic> fetchData() {
     setState(() {
