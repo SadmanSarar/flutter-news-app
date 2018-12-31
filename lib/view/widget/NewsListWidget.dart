@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../data/news/News.dart';
-import '../data/news/NewsRepository.dart';
-import '../event/Eventbus.dart';
-import '../event/events.dart';
+import '../../data/news/News.dart';
+import '../../data/news/NewsRepository.dart';
+import '../../event/Eventbus.dart';
+import '../../event/events.dart';
 import 'NewsListItemWidget.dart';
 
 class NewsListWidget extends StatefulWidget {

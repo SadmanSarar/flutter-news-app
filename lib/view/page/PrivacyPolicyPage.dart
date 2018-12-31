@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_text.dart';
 
-import '../data/settings/SettingRepository.dart';
+import '../../data/settings/SettingRepository.dart';
 
 class PrivacyPolicyPage extends StatefulWidget {
   @override

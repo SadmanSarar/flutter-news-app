@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../data/api/models/Status.dart';
-import '../data/auth/AuthRemoteService.dart';
+import '../../data/api/models/Status.dart';
+import '../../data/auth/AuthRemoteService.dart';
 import 'HomePage.dart';
 
 class LoginPage extends StatefulWidget {

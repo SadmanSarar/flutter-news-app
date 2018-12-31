@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../data/category/Category.dart';
-import '../data/category/CategoryRepository.dart';
-import 'CategoryDetails.dart';
-import 'CategoryItem.dart';
+import '../../data/category/Category.dart';
+import '../../data/category/CategoryRepository.dart';
+import '../page/CategoryDetailsPage.dart';
+import 'CategoryItemWidget.dart';
 
-class CategoryPage extends StatefulWidget {
+class CategoryPageWidget extends StatefulWidget {
   @override
-  _CategoryPageState createState() => _CategoryPageState();
+  _CategoryPageWidgetState createState() => _CategoryPageWidgetState();
 }
 
-class _CategoryPageState extends State<CategoryPage> {
+class _CategoryPageWidgetState extends State<CategoryPageWidget> {
   RefreshController _refreshController;
 
   @override
@@ -19,7 +19,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   List<Category> _list = [];
   CategoryRepository repository = CategoryRepository.create();
-  _CategoryPageState() {}
+  _CategoryPageWidgetState() {}
 
   Future<Null> fetchData() {
     return repository.fetchAndGet().then((value) {
@@ -70,14 +70,14 @@ class _CategoryPageState extends State<CategoryPage> {
               _list.length,
               (index) {
                 var item = _list[index];
-                return new CategoryItem(
+                return new CategoryItemWidget(
                   item,
                   _colorList[index % _colorList.length],
                   (category) {
                     print('CategoryId: ${category.id}');
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => CategoryDetails(category),
+                        builder: (context) => CategoryDetailsPage(category),
                       ),
                     );
                   },

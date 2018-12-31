@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 
-import '../data/URL.dart';
-import '../data/news/News.dart';
-import '../data/news/NewsRepository.dart';
+import '../../data/URL.dart';
+import '../../data/news/News.dart';
+import '../../data/news/NewsRepository.dart';
 
 class NewsDetailsPage extends StatefulWidget {
   final News news;

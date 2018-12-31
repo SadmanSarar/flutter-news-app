@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'CategoryPage.dart';
-import 'DashBoard.dart';
-import 'FavouritePage.dart';
-import 'ProfilePage.dart';
-import 'VideoNewsPage.dart';
+import '../widget/CategoryPageWidget.dart';
+import '../widget/DashBoardWidget.dart';
+import '../widget/FavouritePageWidget.dart';
+import '../widget/ProfilePageWidget.dart';
+import '../widget/VideoNewsPageWidget.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -25,11 +25,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _children = [
-    DashBoard(),
-    CategoryPage(),
-    VideoNewsPage(),
-    FavouritePage(),
-    ProfilePage()
+    DashBoardWidget(),
+    CategoryPageWidget(),
+    VideoNewsPageWidget(),
+    FavouritePageWidget(),
+    ProfilePageWidget()
   ];
 
   final List<String> _title = [

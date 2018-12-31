@@ -3,19 +3,19 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../data/settings/SettingRemoteService.dart';
-import '../data/settings/SettingRepository.dart';
-import 'LoginPage.dart';
-import 'PrivacyPolicyPage.dart';
+import '../../data/settings/SettingRemoteService.dart';
+import '../../data/settings/SettingRepository.dart';
+import '../page/LoginPage.dart';
+import '../page/PrivacyPolicyPage.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePageWidget extends StatefulWidget {
   @override
-  _ProfilePageState createState() {
-    return _ProfilePageState();
+  _ProfilePageWidgetState createState() {
+    return _ProfilePageWidgetState();
   }
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   var settings = SettingRepository.create();
 
   @override

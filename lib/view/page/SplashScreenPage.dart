@@ -2,7 +2,7 @@ import 'dart:async';
 import 'HomePage.dart';
 import 'LoginPage.dart';
 import 'package:flutter/material.dart';
-import '../data/settings/SettingRepository.dart';
+import '../../data/settings/SettingRepository.dart';
 
 class SplashScreenPage extends StatelessWidget {
   final SettingRepository settingRepository = SettingRepository.create();

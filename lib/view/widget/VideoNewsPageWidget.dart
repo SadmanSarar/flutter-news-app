@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'NewsListWidget.dart';
 
-class FavouritePage extends StatelessWidget {
+class VideoNewsPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NewsListWidget('fav', '');
+    return NewsListWidget('video-post', '');
   }
 }
