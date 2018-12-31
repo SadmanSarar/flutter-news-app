@@ -4,7 +4,7 @@ import '../category/Category.dart';
 import '../news/News.dart';
 part 'appDatabase.g.dart'; // this is important!
 
-@TinanoDb(name: "news_app.sqlite", schemaVersion: 3)
+@TinanoDb(name: "news_app.sqlite", schemaVersion: 2)
 abstract class AppDatabase {
   static DatabaseBuilder<AppDatabase> createBuilder() => _$createAppDatabase();
 
@@ -97,7 +97,7 @@ abstract class AppDatabase {
           `publishedAt` TEXT NULL,
           `categoryName` TEXT NULL
           );""");
-    }).addMigration(1, 3, (db) async {
+    }).addMigration(1, 2, (db) async {
       await db.execute("""
         CREATE TABLE `fav_news` ( 
           `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 

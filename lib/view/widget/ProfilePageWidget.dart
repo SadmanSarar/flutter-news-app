@@ -23,114 +23,148 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
     SettingRemoteService().fetchSettings('1234');
     return Container(
       padding: EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Card(
-            elevation: 4.0,
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ClipOval(
-                    child: Image.network(
-                      'https://picsum.photos/200/200',
-                      height: 64,
-                      width: 64,
-                    ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "Sadman Sarar",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0),
-                    ),
-                    Text("sadmansarar@gmail.com"),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: SizedBox.fromSize(
-                    size: Size(80, 40),
-                    child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Card(
+              elevation: 4.0,
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: ClipOval(
+                          child: Image.network(
+                            'https://picsum.photos/200/200',
+                            height: 56,
+                            width: 56,
+                          ),
+                        ),
                       ),
-                      onPressed: () {},
-                      child: Text(
-                        'Edit',
-                        style: TextStyle(color: Colors.blue),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Sadman Sarar",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0),
+                          ),
+                          Text("sadmansarar@gmail.com"),
+                        ],
                       ),
-                    ),
+                    ],
                   ),
-                )
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: RaisedButton(
+                            color: Theme.of(context).primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(4.0),
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              'Edit',
+                              style: TextStyle(
+                                  color: Colors.black
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            right:8.0,top:8.0,bottom:8.0),
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: RaisedButton(
+                            color: Theme.of(context).primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(4.0),
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              'Change Password',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+
             ),
-          ),
-          Card(
-            elevation: 4.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                new ProfileMenu(
-                  "Privacy Policy",
-                  "App Terms and Policy",
-                  Icons.lock,
-                  callback: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => PrivacyPolicyPage(),
-                      ),
-                    );
-                  },
-                ),
-                new ProfileMenu(
-                    "Rate", "Give your rate and feedback", Icons.rate_review,
+            Card(
+              elevation: 4.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  new ProfileMenu(
+                    "Privacy Policy",
+                    "App Terms and Policy",
+                    Icons.lock,
                     callback: () {
-                  LaunchReview.launch();
-                }),
-                new ProfileMenu(
-                  "More",
-                  "More Apps from developer",
-                  Icons.more,
-                  callback: () {
-                    _launchURL('http://sadmansarar.xzy');
-                  },
-                ),
-                new ProfileMenu(
-                  "About",
-                  '',
-                  Icons.info,
-                  callback: () {
-                    _launchURL('http://sadmansarar.xzy');
-                  },
-                ),
-                new ProfileMenu(
-                  "Logout",
-                  '',
-                  Icons.power_settings_new,
-                  callback: () {
-                    settings.saveApiToken('');
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginPage(),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PrivacyPolicyPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  new ProfileMenu(
+                      "Rate", "Give your rate and feedback", Icons.rate_review,
+                      callback: () {
+                    LaunchReview.launch();
+                  }),
+                  new ProfileMenu(
+                    "More",
+                    "More Apps from developer",
+                    Icons.more,
+                    callback: () {
+                      _launchURL('http://sadmansarar.xzy');
+                    },
+                  ),
+                  new ProfileMenu(
+                    "About",
+                    '',
+                    Icons.info,
+                    callback: () {
+                      _launchURL('http://sadmansarar.xzy');
+                    },
+                  ),
+                  new ProfileMenu(
+                    "Logout",
+                    '',
+                    Icons.power_settings_new,
+                    callback: () {
+                      settings.saveApiToken('');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
