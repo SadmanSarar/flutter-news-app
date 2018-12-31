@@ -1,15 +1,17 @@
-import 'service.dart';
-import '../../database/appDataBase.dart';
 import 'dart:async';
-import 'model.dart';
-import '../settings/repository.dart';
-import '../../events/eventbus.dart';
-import '../../events/models.dart';
+
+import '../../event/Eventbus.dart';
+import '../../event/events.dart';
+import '../database/appDataBase.dart';
+import '../settings/SettingRepository.dart';
+import 'News.dart';
+import 'NewsRemoteService.dart';
 
 class NewsRepository {
   NewsRemoteService remoteService;
 
   SettingRepository settings;
+
   NewsRepository(this.remoteService, this.settings);
 
   factory NewsRepository.create() {
@@ -79,13 +81,13 @@ class NewsRepository {
         news.publishedAt,
         news.categoryName);
 
-    eventBus.fire(new FavNewsUpdateEvent());
+    EventBusProvider.defaultInstance().fire(new FavNewsUpdateEvent());
   }
 
   removeFavNews(News news) async {
     var database = await AppDatabase.openMyDatabase();
     database.deleteFavNews(news.id);
-    eventBus.fire(new FavNewsUpdateEvent());
+    EventBusProvider.defaultInstance().fire(new FavNewsUpdateEvent());
   }
 
   Future<bool> isFavouriteNews(int id) async {

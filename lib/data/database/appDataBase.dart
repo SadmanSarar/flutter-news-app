@@ -1,7 +1,7 @@
 import 'package:tinano/tinano.dart';
 import 'dart:async';
-import '../data/category/model.dart';
-import '../data/news/model.dart';
+import '../category/Category.dart';
+import '../news/News.dart';
 part 'appDatabase.g.dart'; // this is important!
 
 @TinanoDb(name: "news_app.sqlite", schemaVersion: 3)
@@ -23,9 +23,7 @@ abstract class AppDatabase {
   Future<int> createCategory(
       int id, String name, String image, String description);
 
-  /**
-   * NEWS
-   */
+  ///NEWS
   @Query("SELECT COUNT(*) FROM news")
   Future<int> getAllNewsCount();
 

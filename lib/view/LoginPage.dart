@@ -1,7 +1,10 @@
 import 'dart:async';
-import 'home.dart';
+
 import 'package:flutter/material.dart';
-import '../data/auth/service.dart';
+
+import '../data/api/models/Status.dart';
+import '../data/auth/AuthRemoteService.dart';
+import 'HomePage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +16,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController passwordController = TextEditingController(text: '');
+
   @override
   void initState() {
     emailController = TextEditingController(text: '');
@@ -200,9 +204,8 @@ class _LoginPageState extends State<LoginPage> {
   Future _gotoNextScreen(BuildContext context) async {
     Widget destination = HomePage();
 
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => destination,
-        ));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => destination,
+    ));
   }
 }

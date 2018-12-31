@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import '../url.dart';
+
+import '../URL.dart';
 
 class SettingRemoteService {
   Future<Map<String, String>> fetchSettings(

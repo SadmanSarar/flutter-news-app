@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'home.dart';
-import 'login.dart';
+import 'HomePage.dart';
+import 'LoginPage.dart';
 import 'package:flutter/material.dart';
-import '../data/settings/repository.dart';
+import '../data/settings/SettingRepository.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreenPage extends StatelessWidget {
   final SettingRepository settingRepository = SettingRepository.create();
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,13 @@
-import 'service.dart';
 import 'dart:async';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'SettingRemoteService.dart';
 
 class SettingRepository {
   SettingRemoteService remoteService;
   Future<SharedPreferences> prefs;
+
   SettingRepository(this.remoteService, this.prefs);
 
   factory SettingRepository.create() {

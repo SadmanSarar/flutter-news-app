@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'news_item.dart';
-import '../data/news/repository.dart';
-import '../data/news/model.dart';
-import '../events/eventbus.dart';
-import '../events/models.dart';
 
-class NewsList extends StatefulWidget {
+import '../data/news/News.dart';
+import '../data/news/NewsRepository.dart';
+import '../event/Eventbus.dart';
+import '../event/events.dart';
+import 'NewsListItemWidget.dart';
+
+class NewsListWidget extends StatefulWidget {
   final String type;
   final String categoryId;
-  NewsList(this.type, this.categoryId);
+
+  NewsListWidget(this.type, this.categoryId);
 
   @override
   _NewsListState createState() {
@@ -16,7 +18,7 @@ class NewsList extends StatefulWidget {
   }
 }
 
-class _NewsListState extends State<NewsList> {
+class _NewsListState extends State<NewsListWidget> {
   var repository = NewsRepository.create();
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
@@ -27,9 +29,12 @@ class _NewsListState extends State<NewsList> {
   bool _loading = false;
   final String type;
   final String categoryId;
+
   _NewsListState(this.type, this.categoryId) {
     if (type == 'fav') {
-      eventBus.on<FavNewsUpdateEvent>().listen((event) {
+      EventBusProvider.defaultInstance()
+          .on<FavNewsUpdateEvent>()
+          .listen((event) {
         fetchData();
       });
     }
@@ -97,7 +102,7 @@ class _NewsListState extends State<NewsList> {
         itemCount: _list.length,
         itemBuilder: (context, index) {
           var item = _list[index];
-          return new NewsListItem(
+          return new NewsListItemWidget(
             item,
             (id) {},
           );

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
-import '../data/news/model.dart';
-import '../data/url.dart';
-import '../data/news/repository.dart';
 
-class NewsDetails extends StatefulWidget {
-  News news;
-  NewsDetails(this.news);
+import '../data/URL.dart';
+import '../data/news/News.dart';
+import '../data/news/NewsRepository.dart';
+
+class NewsDetailsPage extends StatefulWidget {
+  final News news;
+
+  NewsDetailsPage(this.news);
+
   @override
-  _NewsDetailsState createState() => _NewsDetailsState(news);
+  _NewsDetailsPageState createState() => _NewsDetailsPageState(news);
 }
 
-class _NewsDetailsState extends State<NewsDetails> {
+class _NewsDetailsPageState extends State<NewsDetailsPage> {
   NewsRepository _repository = NewsRepository.create();
   String _title;
   String _body;
@@ -20,7 +23,8 @@ class _NewsDetailsState extends State<NewsDetails> {
   final FlutterYoutube youtube = FlutterYoutube();
   News _news;
   bool _isFavourite = false;
-  _NewsDetailsState(News news) {
+
+  _NewsDetailsPageState(News news) {
     _news = news;
     _title = news.title;
     _body = news.body;

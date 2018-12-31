@@ -1,16 +1,20 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import '../settings/repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../url.dart';
+
+import '../settings/SettingRepository.dart';
+import '../URL.dart';
+import '../api/models/Resource.dart';
 
 class AuthRemoteService {
   SettingRepository settingRepository;
+
   AuthRemoteService(this.settingRepository);
 
   factory AuthRemoteService.create() {
     return AuthRemoteService(SettingRepository.create());
   }
+
   Future<Resource<dynamic>> login(
     String email,
     String password,
@@ -47,29 +51,5 @@ class AuthRemoteService {
       print('Response msg: $msg');
       return Resource.error(null, msg);
     }
-  }
-}
-
-enum Status { ERROR, SUCCESS, LOADING, OFFLINE }
-
-class Resource<T> {
-  T data;
-  String message;
-  Status status;
-
-  Resource(this.data, this.message, this.status);
-
-  static Resource success(data) {
-    return Resource(data, null, Status.SUCCESS);
-  }
-
-  static Resource error(data, String msg) {
-    var resource = Resource(data, msg, Status.ERROR);
-    resource.message = msg;
-    return resource;
-  }
-
-  static Resource loading(data) {
-    return Resource(data, null, Status.LOADING);
   }
 }

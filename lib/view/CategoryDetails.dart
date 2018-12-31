@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'news_list.dart';
-import '../data/category/model.dart';
+import 'NewsListWidget.dart';
+import '../data/category/Category.dart';
 
 class CategoryDetails extends StatelessWidget {
   final Category category;
@@ -11,7 +11,7 @@ class CategoryDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(category.name),
       ),
-      body: NewsList('', category.id.toString()),
+      body: NewsListWidget('', category.id.toString()),
     );
   }
 }

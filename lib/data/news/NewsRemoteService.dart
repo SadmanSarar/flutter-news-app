@@ -1,7 +1,9 @@
-import 'model.dart';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import '../url.dart';
+
+import '../URL.dart';
+import 'News.dart';
 
 class NewsRemoteService {
   Future<List<News>> fetchNews(

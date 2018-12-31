@@ -1,17 +1,17 @@
-import 'model.dart';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import '../url.dart';
+
+import '../URL.dart';
+import 'Category.dart';
 
 class CategoryRemoteService {
   Future<List<Category>> fetchCategory(String apiToken) async {
     var url = URL.addQuery(URL.category, {
       'api_token': apiToken,
     });
-    final response = await http.get(url,
-    headers: {
-      'Accept' : 'application/json'
-    });
+    final response =
+        await http.get(url, headers: {'Accept': 'application/json'});
 
     if (response.statusCode == 200) {
       print(response.body);

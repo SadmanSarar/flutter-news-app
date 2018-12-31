@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../data/settings/service.dart';
-import 'privacy_policy.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'login.dart';
-import '../data/settings/repository.dart';
+
+import '../data/settings/SettingRemoteService.dart';
+import '../data/settings/SettingRepository.dart';
+import 'LoginPage.dart';
+import 'PrivacyPolicyPage.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -86,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   callback: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => PrivacyPolicy(),
+                        builder: (context) => PrivacyPolicyPage(),
                       ),
                     );
                   },
@@ -154,6 +155,7 @@ class ProfileMenu extends StatelessWidget {
   final String _title;
   final String _subTitle;
   final GestureTapCallback callback;
+
   const ProfileMenu(this._title, this._subTitle, this._iconData,
       {Key key, this.callback})
       : super(key: key);

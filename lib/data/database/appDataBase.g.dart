@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
 part of 'appDataBase.dart';
 
 // **************************************************************************

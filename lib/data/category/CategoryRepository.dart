@@ -1,20 +1,19 @@
-import 'service.dart';
-import '../../database/appDataBase.dart';
 import 'dart:async';
-import '../category/model.dart';
-import '../settings/repository.dart';
 
+import '../database/appDataBase.dart';
+import '../category/Category.dart';
+import '../settings/SettingRepository.dart';
+import 'CategoryRemoteService.dart';
 
 class CategoryRepository {
   CategoryRemoteService remoteService;
   SettingRepository settings;
-  CategoryRepository(this.remoteService,this.settings);
+
+  CategoryRepository(this.remoteService, this.settings);
 
   factory CategoryRepository.create() {
     return CategoryRepository(
-      CategoryRemoteService(),
-      SettingRepository.create()
-    );
+        CategoryRemoteService(), SettingRepository.create());
   }
 
   Future<List<Category>> fetchAndGet() async {
@@ -32,9 +31,9 @@ class CategoryRepository {
       );
     });
     var dummy = await database.getAllCategory();
-    dummy.forEach((item){
+    dummy.forEach((item) {
       print(item.toString());
-    }); 
+    });
     return database.getAllCategory();
   }
 }

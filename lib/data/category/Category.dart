@@ -2,7 +2,6 @@ import 'package:tinano/tinano.dart';
 
 @row
 class Category {
-  
   final int id;
   final String name;
   final String imageUrl;
@@ -25,6 +24,6 @@ class Category {
 
   @override
   String toString() {
-    return 'id: $id; name: $name; image: $imageUrl; description: $description';
+    return 'id: $id; name: $name; image: $imageUrl; description: $description,';
   }
 }

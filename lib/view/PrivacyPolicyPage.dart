@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_text.dart';
-import '../data/settings/repository.dart';
 
-class PrivacyPolicy extends StatefulWidget {
+import '../data/settings/SettingRepository.dart';
+
+class PrivacyPolicyPage extends StatefulWidget {
   @override
-  _PrivacyPolicyState createState() => _PrivacyPolicyState();
+  _PrivacyPolicyPageState createState() => _PrivacyPolicyPageState();
 }
 
-class _PrivacyPolicyState extends State<PrivacyPolicy> {
+class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
   SettingRepository repository;
 
   String _privacyPolicy = '';
@@ -38,7 +39,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         title: Text("Privacy Policy"),
       ),
       body: HtmlText(
-        data: (_privacyPolicy == null ||_privacyPolicy.isEmpty) ? '<h3>Not available</h3>' :  _privacyPolicy,
+        data: (_privacyPolicy == null || _privacyPolicy.isEmpty)
+            ? '<h3>Not available</h3>'
+            : _privacyPolicy,
       ),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
-import '../data/category/model.dart';
-import '../data/url.dart';
+
+import '../data/URL.dart';
+import '../data/category/Category.dart';
 
 typedef CategoryCallback = void Function(Category category);
 
@@ -9,6 +10,7 @@ class CategoryItem extends StatelessWidget {
   final Category category;
   final Color color;
   final CategoryCallback callback;
+
   const CategoryItem(
     this.category,
     this.color,

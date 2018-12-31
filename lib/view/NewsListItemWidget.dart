@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'news_details.dart';
-import '../data/news/model.dart';
-import '../data/url.dart';
 import 'package:html/parser.dart';
+import 'package:transparent_image/transparent_image.dart';
+
+import '../data/URL.dart';
+import '../data/news/News.dart';
+import 'NewsDetailsPage.dart';
 
 typedef NewsItemCallback = Function(int id);
 
-class NewsListItem extends StatelessWidget {
+class NewsListItemWidget extends StatelessWidget {
   final News news;
   final NewsItemCallback callback;
 
-  const NewsListItem(
+  const NewsListItemWidget(
     this.news,
     this.callback, {
     Key key,
@@ -25,7 +26,7 @@ class NewsListItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NewsDetails(news)),
+            MaterialPageRoute(builder: (context) => NewsDetailsPage(news)),
           );
           callback(news.id);
         },
