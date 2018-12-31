@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'home.dart';
 import 'package:flutter/material.dart';
-import '../api/auth/service.dart';
+import '../data/auth/service.dart';
 
 class LoginPage extends StatefulWidget {
   @override

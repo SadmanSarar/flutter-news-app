@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'categoryItem.dart';
-import '../api/category/repository.dart';
-import '../api/category/model.dart';
+import '../data/category/repository.dart';
+import '../data/category/model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'category_details.dart';
 

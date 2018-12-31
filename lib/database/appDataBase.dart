@@ -1,7 +1,7 @@
 import 'package:tinano/tinano.dart';
 import 'dart:async';
-import '../api/category/model.dart';
-import '../api/news/model.dart';
+import '../data/category/model.dart';
+import '../data/news/model.dart';
 part 'appDatabase.g.dart'; // this is important!
 
 @TinanoDb(name: "news_app.sqlite", schemaVersion: 3)

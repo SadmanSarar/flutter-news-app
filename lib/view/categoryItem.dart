@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
-import '../api/category/model.dart';
-import '../api/url.dart';
+import '../data/category/model.dart';
+import '../data/url.dart';
 
 typedef CategoryCallback = void Function(Category category);
 

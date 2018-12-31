@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'news_item.dart';
-import '../api/news/model.dart';
+import '../data/news/model.dart';
 import 'news_list.dart';
 
 class Favourite extends StatelessWidget {

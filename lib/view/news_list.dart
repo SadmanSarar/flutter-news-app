@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'news_item.dart';
-import '../api/news/repository.dart';
-import '../api/news/model.dart';
-import '../api/url.dart';
+import '../data/news/repository.dart';
+import '../data/news/model.dart';
 import '../events/eventbus.dart';
 import '../events/models.dart';
 

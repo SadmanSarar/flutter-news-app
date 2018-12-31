@@ -2,7 +2,7 @@ import 'dart:async';
 import 'home.dart';
 import 'login.dart';
 import 'package:flutter/material.dart';
-import '../api/settings/repository.dart';
+import '../data/settings/repository.dart';
 
 class SplashScreen extends StatelessWidget {
   final SettingRepository settingRepository = SettingRepository.create();

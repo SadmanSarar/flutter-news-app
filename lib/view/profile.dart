@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../api/settings/service.dart';
+import '../data/settings/service.dart';
 import 'privacy_policy.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'login.dart';
-import '../api/settings/repository.dart';
+import '../data/settings/repository.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
