@@ -200,8 +200,7 @@ class _LoginPageState extends State<LoginPage> {
   Future _gotoNextScreen(BuildContext context) async {
     Widget destination = HomePage();
 
-    Navigator.pushReplacement(
-        context,
+    Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => destination,
         ));

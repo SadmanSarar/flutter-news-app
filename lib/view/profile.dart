@@ -4,6 +4,8 @@ import 'privacy_policy.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'login.dart';
+import '../api/settings/repository.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var settings = SettingRepository.create();
+
   @override
   Widget build(BuildContext context) {
     SettingRemoteService().fetchSettings('1234');
@@ -106,6 +110,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   Icons.info,
                   callback: () {
                     _launchURL('http://sadmansarar.xzy');
+                  },
+                ),
+                new ProfileMenu(
+                  "Logout",
+                  '',
+                  Icons.power_settings_new,
+                  callback: () {
+                    settings.saveApiToken('');
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ),
+                    );
                   },
                 ),
               ],
