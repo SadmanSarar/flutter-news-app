@@ -3,6 +3,7 @@ import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 import '../api/news/model.dart';
 import '../api/url.dart';
+import '../api/news/repository.dart';
 
 class NewsDetails extends StatefulWidget {
   News news;
@@ -12,15 +13,28 @@ class NewsDetails extends StatefulWidget {
 }
 
 class _NewsDetailsState extends State<NewsDetails> {
+  NewsRepository _repository = NewsRepository.create();
   String _title;
   String _body;
   String _imgUrl;
   final FlutterYoutube youtube = FlutterYoutube();
-
+  News _news;
+  bool _isFavourite = false;
   _NewsDetailsState(News news) {
+    _news = news;
     _title = news.title;
     _body = news.body;
     _imgUrl = URL.imageUrl(news.image);
+  }
+
+  @override
+  void initState() {
+    _repository.isFavouriteNews(_news.id).then((value) {
+      setState(() {
+        _isFavourite = value;
+      });
+    });
+    super.initState();
   }
 
   @override
@@ -54,16 +68,29 @@ class _NewsDetailsState extends State<NewsDetails> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          FlutterYoutube.playYoutubeVideoByUrl(
-              apiKey: "AIzaSyBLkHuG7jTPvaZl0LLi6aqP6-ypSv2ZCe0",
-              videoUrl: "https://www.youtube.com/watch?v=811aNwrMSEU",
-              autoPlay: true, //default falase
-              fullScreen: true //default false
-              );
+          if (!_isFavourite) {
+            _repository.saveFavNews(_news);
+            setState(() {
+              _isFavourite = true;
+            });
+          } else {
+            _repository.removeFavNews(_news);
+            setState(() {
+              _isFavourite = false;
+            });
+          }
+          /*
+            FlutterYoutube.playYoutubeVideoByUrl(
+                apiKey: "AIzaSyBLkHuG7jTPvaZl0LLi6aqP6-ypSv2ZCe0",
+                videoUrl: "https://www.youtube.com/watch?v=811aNwrMSEU",
+                autoPlay: true, //default falase
+                fullScreen: true //default false
+                );
+          */
         },
         elevation: 4.0,
         tooltip: 'Make Favourite',
-        child: Icon(Icons.favorite),
+        child: _isFavourite ? Icon(Icons.cancel) : Icon(Icons.favorite),
       ),
     );
   }

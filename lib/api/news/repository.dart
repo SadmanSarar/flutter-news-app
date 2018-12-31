@@ -18,6 +18,12 @@ class NewsRepository {
   }
 
   Future<List<News>> fetchAndGet(String type, String categoryId) async {
+    var database = await AppDatabase.openMyDatabase();
+
+    if (type == 'fav') {
+      return database.getFavNews();
+    }
+
     var apiToken = await settings.getApiToken();
     var future = remoteService.fetchNews(
       apiToken,
@@ -43,6 +49,7 @@ class NewsRepository {
         item.categoryName,
       );
     });
+
     if (type.isEmpty && categoryId.isEmpty) {
       return database.getAllNews();
     }
@@ -53,6 +60,36 @@ class NewsRepository {
       return database.getAllNewsByType(type);
     } else {
       return database.getAllNewsForCategory(int.parse(categoryId));
+    }
+  }
+
+  saveFavNews(News news) async {
+    var database = await AppDatabase.openMyDatabase();
+    database.deleteFavNews(news.id);
+    database.createFavNews(
+        news.id,
+        news.title,
+        news.body,
+        news.image,
+        news.categoryId,
+        news.type,
+        news.published,
+        news.publishedAt,
+        news.categoryName);
+  }
+
+  removeFavNews(News news) async {
+    var database = await AppDatabase.openMyDatabase();
+    database.deleteFavNews(news.id);
+  }
+
+  Future<bool> isFavouriteNews(int id) async {
+    var database = await AppDatabase.openMyDatabase();
+    var news = await database.getFavNewsById(id);
+    if(news == null){
+      return false;
+    }else {
+      return true;
     }
   }
 }

@@ -7,7 +7,7 @@ part of 'appDataBase.dart';
 // **************************************************************************
 
 DatabaseBuilder<AppDatabase> _$createAppDatabase() {
-  return new DatabaseBuilder(new _$AppDatabaseImpl(), "news_app.sqlite", 2);
+  return new DatabaseBuilder(new _$AppDatabaseImpl(), "news_app.sqlite", 3);
 }
 
 class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
@@ -185,6 +185,53 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
     return parsedResults;
   }
 
+  Future<List<News>> getFavNews() async {
+    String sql = "SELECT * FROM fav_news";
+
+    final bindArgs = [];
+
+    final rows = await database.rawQuery(sql, bindArgs);
+
+    final parsedResults = new List<News>();
+    rows.forEach((row) {
+      News parsedRow = new News(
+          row["id"] as int,
+          row["title"] as String,
+          row["body"] as String,
+          row["image"] as String,
+          row["categoryId"] as int,
+          row["type"] as String,
+          row["published"] as int,
+          row["publishedAt"] as String,
+          row["categoryName"] as String);
+      parsedResults.add(parsedRow);
+    });
+    return parsedResults;
+  }
+
+  Future<News> getFavNewsById(int id) async {
+    String sql = "SELECT * FROM fav_news where id = ?";
+
+    final bindParams_0 = id;
+
+    final bindArgs = [bindParams_0];
+
+    final rows = await database.rawQuery(sql, bindArgs);
+
+    final row = rows.first;
+    News parsedRow = new News(
+        row["id"] as int,
+        row["title"] as String,
+        row["body"] as String,
+        row["image"] as String,
+        row["categoryId"] as int,
+        row["type"] as String,
+        row["published"] as int,
+        row["publishedAt"] as String,
+        row["categoryName"] as String);
+    return parsedRow;
+  }
+
   Future<int> deleteAllNews() async {
     String sql = "Delete from news";
 
@@ -209,6 +256,60 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
       String categoryName) async {
     String sql =
         "INSERT INTO news (id,title,body,image,categoryId,type,published,publishedAt,categoryName) VALUES (?,?,?,?,?,?,?,?,?)";
+
+    final bindParams_0 = id;
+    final bindParams_1 = title;
+    final bindParams_2 = body;
+    final bindParams_3 = image;
+    final bindParams_4 = categoryId;
+    final bindParams_5 = type;
+    final bindParams_6 = published;
+    final bindParams_7 = publishedAt;
+    final bindParams_8 = categoryName;
+
+    final bindArgs = [
+      bindParams_0,
+      bindParams_1,
+      bindParams_2,
+      bindParams_3,
+      bindParams_4,
+      bindParams_5,
+      bindParams_6,
+      bindParams_7,
+      bindParams_8
+    ];
+
+    int lastInsertedRecordId = await database.rawInsert(sql, bindArgs);
+
+    return lastInsertedRecordId;
+  }
+
+  Future<int> deleteFavNews(int id) async {
+    String sql = "Delete from fav_news where id =?";
+
+    final bindParams_0 = id;
+
+    final bindArgs = [bindParams_0];
+
+    final rows = await database.rawQuery(sql, bindArgs);
+
+    final row = rows.first;
+    int parsedRow = row.values.first as int;
+    return parsedRow;
+  }
+
+  Future<int> createFavNews(
+      int id,
+      String title,
+      String body,
+      String image,
+      int categoryId,
+      String type,
+      int published,
+      String publishedAt,
+      String categoryName) async {
+    String sql =
+        "INSERT INTO fav_news (id,title,body,image,categoryId,type,published,publishedAt,categoryName) VALUES (?,?,?,?,?,?,?,?,?)";
 
     final bindParams_0 = id;
     final bindParams_1 = title;
