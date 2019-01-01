@@ -8,6 +8,7 @@ import '../../data/settings/SettingRepository.dart';
 import '../page/LoginPage.dart';
 import '../page/PrivacyPolicyPage.dart';
 import '../../data/settings/User.dart';
+import 'ChangePasswordDialogWidget.dart';
 
 class ProfilePageWidget extends StatefulWidget {
   @override
@@ -103,86 +104,97 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   }
 
   Widget _getUserWidget(User user) {
-    if(user == null){
+    if (user == null) {
       return Container();
     }
     return Card(
-              elevation: 4.0,
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: ClipOval(
-                          child: Image.network(
-                            user.image.isEmpty ? 'https://picsum.photos/200/200' : user.image,
-                            height: 56,
-                            width: 56,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            user.name,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0),
-                          ),
-                          Text(user.email),
-                        ],
-                      ),
-                    ],
+      elevation: 4.0,
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ClipOval(
+                  child: Image.network(
+                    user.image.isEmpty
+                        ? 'https://picsum.photos/200/200'
+                        : user.image,
+                    height: 56,
+                    width: 56,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(4.0),
-                            ),
-                            onPressed: () {},
-                            child: Text(
-                              'Edit',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(4.0),
-                            ),
-                            onPressed: () {},
-                            child: Text(
-                              'Change Password',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    user.name,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0),
+                  ),
+                  Text(user.email),
                 ],
               ),
-            );
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: RaisedButton(
+                    color: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(4.0),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'Edit',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: RaisedButton(
+                    color: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(4.0),
+                    ),
+                    onPressed: () {
+                      _showChangePasswordScreen();
+                    },
+                    child: Text(
+                      'Change Password',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
+
+  void _showChangePasswordScreen() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ChangePasswordDialogWIdget(
+              context: context,
+            )));
+  }
+
   _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);

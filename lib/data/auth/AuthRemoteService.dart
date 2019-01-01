@@ -6,7 +6,8 @@ import '../settings/SettingRepository.dart';
 import '../settings/User.dart';
 import '../URL.dart';
 import '../api/models/Resource.dart';
-
+import '../../event/Eventbus.dart';
+import '../../event/events.dart';
 
 class AuthRemoteService {
   SettingRepository settingRepository;
@@ -44,7 +45,7 @@ class AuthRemoteService {
           jsonBody['user']['name'],
           jsonBody['user']['email'],
           jsonBody['user']['image'],
-          );
+        );
         settingRepository.saveApiToken(apiToken);
         settingRepository.saveUser(user);
       } catch (ex, stack) {
@@ -52,6 +53,42 @@ class AuthRemoteService {
         print(stack);
       }
       return Resource.success(apiToken);
+    } else {
+      var jsonBody = json.decode(responseBody);
+      String msg = jsonBody['user_message'];
+      print('Response msg: $msg');
+      return Resource.error(null, msg);
+    }
+  }
+
+  Future<Resource<dynamic>> changePassword(
+    String newPass,
+    String oldPass,
+  ) async {
+    var url = URL.changePass;
+    var body = {
+      'new_password': newPass,
+      'old_password': oldPass,
+      'api_token': await settingRepository.getApiToken(),
+    };
+    var client = http.Client();
+    var request = new http.Request('POST', Uri.parse(url));
+    //  request.headers['Content-Type'] = 'application/json; charset=utf-8';
+    request.headers['Accept'] = 'application/json; charset=utf-8';
+    request.bodyFields = body;
+    var response = await client.send(request);
+    var responseBody = await response.stream.bytesToString();
+    print('Response: $responseBody');
+    if (response.statusCode == 200) {
+      var jsonBody = json.decode(responseBody);
+      String userMessage = jsonBody['user_message'];
+      settingRepository.saveApiToken('');
+      EventBusProvider.defaultInstance().fire(AuthErrorEvent());
+      var value = Resource.success(userMessage);
+      value.message = userMessage;
+      return value;
+    } else if (response.statusCode == 401) {
+      EventBusProvider.defaultInstance().fire(AuthErrorEvent());
     } else {
       var jsonBody = json.decode(responseBody);
       String msg = jsonBody['user_message'];
