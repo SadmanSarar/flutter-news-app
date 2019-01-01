@@ -4,7 +4,7 @@ import 'package:launch_review/launch_review.dart';
 import 'package:news_app_flutter/data/settings/SettingRemoteService.dart';
 import 'package:news_app_flutter/data/settings/SettingRepository.dart';
 import 'package:news_app_flutter/data/settings/User.dart';
-import 'package:news_app_flutter/view/page/LoginPage.dart';
+import 'package:news_app_flutter/view/Routes.dart';
 import 'package:news_app_flutter/view/page/PrivacyPolicyPage.dart';
 import 'package:news_app_flutter/view/widget/ChangePasswordDialogWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -86,11 +86,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     Icons.power_settings_new,
                     callback: () {
                       settings.saveApiToken('');
-                      Navigator.pushReplacement(
+                      Navigator.pushReplacementNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(),
-                        ),
+                        ROUTE_PATH[Routes.LOGIN],
                       );
                     },
                   ),

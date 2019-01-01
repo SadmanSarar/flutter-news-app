@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:news_app_flutter/data/api/models/Status.dart';
 import 'package:news_app_flutter/data/auth/AuthRemoteService.dart';
-import 'package:news_app_flutter/view/page/HomePage.dart';
+import 'package:news_app_flutter/view/Routes.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -25,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    // Clean up the controller when the Widget is disposed
     // emailController.dispose();
     // passwordController.dispose();
     super.dispose();
@@ -45,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-    final email = TextField(
+    final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       style: TextStyle(
         color: Colors.white,
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             )),
       ),
     );
-    final password = TextField(
+    final password = TextFormField(
       autofocus: false,
       style: TextStyle(
         color: Colors.white,
@@ -112,25 +111,27 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
       body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 48.0),
-            email,
-            SizedBox(height: 8.0),
-            password,
-            SizedBox(height: 24.0),
-            loginButton,
-          ],
+        child: Form(
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(left: 24.0, right: 24.0),
+            children: <Widget>[
+              logo,
+              SizedBox(height: 48.0),
+              email,
+              SizedBox(height: 8.0),
+              password,
+              SizedBox(height: 24.0),
+              loginButton,
+            ],
+          ),
         ),
       ),
     );
   }
 
   void _login(BuildContext context) {
-    AuthRemoteService authRemoteService = AuthRemoteService.create();
+    final AuthRemoteService authRemoteService = AuthRemoteService.create();
     authRemoteService
         .login(emailController.text, passwordController.text)
         .then((value) {
@@ -139,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
         _showMessageDialog('Error', value.message);
         return;
       }
-      _gotoNextScreen();
+      _gotoNextScreen(context);
     }).catchError((e, s) {
       print(e);
       Navigator.of(context).pop();
@@ -198,11 +199,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future _gotoNextScreen() async {
-    Widget destination = HomePage();
-
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => destination,
-    ));
+  void _gotoNextScreen(BuildContext _context) {
+    Navigator.of(context).pushReplacementNamed(ROUTE_PATH[Routes.HOME]);
   }
 }

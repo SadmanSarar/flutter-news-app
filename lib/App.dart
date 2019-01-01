@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_flutter/view/Routes.dart';
+import 'package:news_app_flutter/view/page/HomePage.dart';
+import 'package:news_app_flutter/view/page/LoginPage.dart';
 import 'package:news_app_flutter/view/page/SplashScreenPage.dart';
 
 class App extends StatelessWidget {
@@ -13,6 +16,10 @@ class App extends StatelessWidget {
       ),
       home: SplashScreenPage(),
       showPerformanceOverlay: false,
+      routes: {
+        ROUTE_PATH[Routes.LOGIN]: (buildContext) => LoginPage(),
+        ROUTE_PATH[Routes.HOME]: (buildContext) => HomePage(),
+      },
     );
   }
 }

@@ -62,6 +62,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(titleForIndex(_navIndex)),
+        automaticallyImplyLeading: false,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _navIndex,

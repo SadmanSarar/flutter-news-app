@@ -17,20 +17,22 @@ class AuthRemoteService {
     return AuthRemoteService(SettingRepository.create());
   }
 
-  Future<Resource<dynamic>> login(
-    String email,
-    String password,
-  ) async {
+  Future<Resource<dynamic>> login(String email,
+      String password,) async {
     var url = URL.login;
-    // var url = 'http://requestbin.fullcontact.com/1fzhku61';
+//    var url = 'http://requestbin.fullcontact.com/165xw8t1';
     var body = {
       'email': email,
       'password': password,
     };
+    url = URL.addQuery(url, body);
     var client = http.Client();
     var request = new http.Request('POST', Uri.parse(url));
     //  request.headers['Content-Type'] = 'application/json; charset=utf-8';
     request.headers['Accept'] = 'application/json; charset=utf-8';
+    request.headers['email'] = email;
+    request.headers['password'] = password;
+
     request.bodyFields = body;
     var response = await client.send(request);
     var responseBody = await response.stream.bytesToString();
@@ -60,10 +62,8 @@ class AuthRemoteService {
     }
   }
 
-  Future<Resource<dynamic>> changePassword(
-    String newPass,
-    String oldPass,
-  ) async {
+  Future<Resource<dynamic>> changePassword(String newPass,
+      String oldPass,) async {
     var url = URL.changePass;
     var body = {
       'new_password': newPass,

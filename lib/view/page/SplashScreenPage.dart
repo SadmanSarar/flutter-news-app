@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:news_app_flutter/data/settings/SettingRepository.dart';
-import 'package:news_app_flutter/view/page/HomePage.dart';
-import 'package:news_app_flutter/view/page/LoginPage.dart';
+import 'package:news_app_flutter/view/Routes.dart';
 
 class SplashScreenPage extends StatelessWidget {
   final settingRepository = SettingRepository.create();
@@ -58,13 +57,10 @@ class SplashScreenPage extends StatelessWidget {
   Future _gotoNextScreen(BuildContext context) async {
     var apiToken = await settingRepository.getApiToken();
 
-    Widget destination =
-        (apiToken == null || apiToken.isEmpty) ? LoginPage() : HomePage();
+    String destination = (apiToken == null || apiToken.isEmpty)
+        ? ROUTE_PATH[Routes.LOGIN]
+        : ROUTE_PATH[Routes.HOME];
 
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => destination,
-        ));
+    Navigator.pushReplacementNamed(context, destination);
   }
 }
