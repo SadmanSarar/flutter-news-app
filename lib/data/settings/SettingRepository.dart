@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'SettingRemoteService.dart';
+import 'User.dart';
 
 class SettingRepository {
   SettingRemoteService remoteService;
@@ -41,9 +43,19 @@ class SettingRepository {
     return pref.setString('apiToken', apiToken);
   }
 
-  Future<String> login(String text, String text2) {
-    return Future.delayed(Duration(seconds: 2), () {
-      return 'Oka';
-    });
+  Future<User> getUser() async {
+    var pref = await prefs;
+    return User(
+      pref.getString('user.name'),
+      pref.getString('user.email'),
+      pref.getString('user.image'),
+    );
+  }
+
+  Future<bool> saveUser(User user) async {
+    var pref = await prefs;
+    pref.setString('user.name', user.name);
+    pref.setString('user.email', user.email);
+    return pref.setString('user.image', user.image);
   }
 }

@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    listenForAuthError(context);
+    // listenForAuthError(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(titleForIndex(_navIndex)),

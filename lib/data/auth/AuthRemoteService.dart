@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../settings/SettingRepository.dart';
+import '../settings/User.dart';
 import '../URL.dart';
 import '../api/models/Resource.dart';
+
 
 class AuthRemoteService {
   SettingRepository settingRepository;
@@ -21,9 +23,6 @@ class AuthRemoteService {
   ) async {
     var url = URL.login;
     // var url = 'http://requestbin.fullcontact.com/1fzhku61';
-    print(email);
-    print(url);
-    print(password);
     var body = {
       'email': email,
       'password': password,
@@ -35,15 +34,23 @@ class AuthRemoteService {
     request.bodyFields = body;
     var response = await client.send(request);
     var responseBody = await response.stream.bytesToString();
-    print('Response Code: ${response.statusCode}');
-    print('Response Body: $responseBody');
+    print('Response: $responseBody');
     if (response.statusCode == 200) {
-      print(responseBody);
       var jsonBody = json.decode(responseBody);
-      print('Json parsed');
       String apiToken = jsonBody['access_token'];
-      print('API Toke : $apiToken');
-      settingRepository.saveApiToken(apiToken);
+      print(apiToken);
+      try {
+        User user = User(
+          jsonBody['user']['name'],
+          jsonBody['user']['email'],
+          jsonBody['user']['image'],
+          );
+        settingRepository.saveApiToken(apiToken);
+        settingRepository.saveUser(user);
+      } catch (ex, stack) {
+        print(ex);
+        print(stack);
+      }
       return Resource.success(apiToken);
     } else {
       var jsonBody = json.decode(responseBody);

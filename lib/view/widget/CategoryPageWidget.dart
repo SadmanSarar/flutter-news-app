@@ -19,7 +19,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
 
   List<Category> _list = [];
   CategoryRepository repository = CategoryRepository.create();
-  _CategoryPageWidgetState() {}
+  _CategoryPageWidgetState();
 
   Future<Null> fetchData() {
     return repository.fetchAndGet().then((value) {
