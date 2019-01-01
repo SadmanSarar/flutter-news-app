@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../data/auth/AuthRemoteService.dart';
-import '../../data/api/models/Status.dart';
-import '../../data/api/models/Resource.dart';
+import 'package:news_app_flutter/data/api/models/Status.dart';
+import 'package:news_app_flutter/data/auth/AuthRemoteService.dart';
 
 class ChangePasswordDialogWIdget extends StatefulWidget {
   const ChangePasswordDialogWIdget({
@@ -25,6 +24,7 @@ class ChangePasswordDialogWIdgetState
 
   final _formKey = GlobalKey<FormState>();
   final authService = AuthRemoteService.create();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

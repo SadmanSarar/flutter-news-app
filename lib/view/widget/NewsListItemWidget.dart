@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
+import 'package:news_app_flutter/data/URL.dart';
+import 'package:news_app_flutter/data/news/News.dart';
+import 'package:news_app_flutter/view/page/NewsDetailsPage.dart';
 import 'package:transparent_image/transparent_image.dart';
-
-import '../../data/URL.dart';
-import '../../data/news/News.dart';
-import '../page/NewsDetailsPage.dart';
 
 typedef NewsItemCallback = Function(int id);
 

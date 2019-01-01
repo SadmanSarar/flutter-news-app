@@ -1,11 +1,13 @@
 import 'dart:async';
-import 'HomePage.dart';
-import 'LoginPage.dart';
+
 import 'package:flutter/material.dart';
-import '../../data/settings/SettingRepository.dart';
+import 'package:news_app_flutter/data/settings/SettingRepository.dart';
+import 'package:news_app_flutter/view/page/HomePage.dart';
+import 'package:news_app_flutter/view/page/LoginPage.dart';
 
 class SplashScreenPage extends StatelessWidget {
-  final SettingRepository settingRepository = SettingRepository.create();
+  final settingRepository = SettingRepository.create();
+
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
@@ -56,7 +58,8 @@ class SplashScreenPage extends StatelessWidget {
   Future _gotoNextScreen(BuildContext context) async {
     var apiToken = await settingRepository.getApiToken();
 
-    Widget destination = (apiToken==null || apiToken.isEmpty) ? LoginPage() : HomePage();
+    Widget destination =
+        (apiToken == null || apiToken.isEmpty) ? LoginPage() : HomePage();
 
     Navigator.pushReplacement(
         context,

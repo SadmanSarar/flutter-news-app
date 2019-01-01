@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_flutter/data/URL.dart';
+import 'package:news_app_flutter/data/category/Category.dart';
 import 'package:transparent_image/transparent_image.dart';
-
-import '../../data/URL.dart';
-import '../../data/category/Category.dart';
 
 typedef CategoryCallback = void Function(Category category);
 

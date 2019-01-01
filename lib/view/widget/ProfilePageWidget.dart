@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:news_app_flutter/data/settings/SettingRemoteService.dart';
+import 'package:news_app_flutter/data/settings/SettingRepository.dart';
+import 'package:news_app_flutter/data/settings/User.dart';
+import 'package:news_app_flutter/view/page/LoginPage.dart';
+import 'package:news_app_flutter/view/page/PrivacyPolicyPage.dart';
+import 'package:news_app_flutter/view/widget/ChangePasswordDialogWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../data/settings/SettingRemoteService.dart';
-import '../../data/settings/SettingRepository.dart';
-import '../page/LoginPage.dart';
-import '../page/PrivacyPolicyPage.dart';
-import '../../data/settings/User.dart';
-import 'ChangePasswordDialogWidget.dart';
 
 class ProfilePageWidget extends StatefulWidget {
   @override
@@ -20,6 +19,7 @@ class ProfilePageWidget extends StatefulWidget {
 class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   var settings = SettingRepository.create();
   User user;
+
   @override
   void initState() {
     super.initState();

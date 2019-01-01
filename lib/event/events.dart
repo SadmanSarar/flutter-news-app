@@ -1,2 +1,3 @@
 class FavNewsUpdateEvent {}
+
 class AuthErrorEvent {}

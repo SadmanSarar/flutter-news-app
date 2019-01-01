@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
-import '../../data/api/models/Status.dart';
-import '../../data/auth/AuthRemoteService.dart';
-import 'HomePage.dart';
+import 'package:news_app_flutter/data/api/models/Status.dart';
+import 'package:news_app_flutter/data/auth/AuthRemoteService.dart';
+import 'package:news_app_flutter/view/page/HomePage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -141,7 +140,6 @@ class _LoginPageState extends State<LoginPage> {
         return;
       }
       _gotoNextScreen();
-
     }).catchError((e, s) {
       print(e);
       Navigator.of(context).pop();

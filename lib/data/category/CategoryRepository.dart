@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import '../database/appDataBase.dart';
-import '../category/Category.dart';
-import '../settings/SettingRepository.dart';
-import 'CategoryRemoteService.dart';
+import 'package:news_app_flutter/data/category/Category.dart';
+import 'package:news_app_flutter/data/category/CategoryRemoteService.dart';
+import 'package:news_app_flutter/data/database/appDataBase.dart';
+import 'package:news_app_flutter/data/settings/SettingRepository.dart';
 
 class CategoryRepository {
   CategoryRemoteService remoteService;

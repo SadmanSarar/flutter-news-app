@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import '../../event/Eventbus.dart';
-import '../../event/events.dart';
-import '../database/appDataBase.dart';
-import '../settings/SettingRepository.dart';
-import 'News.dart';
-import 'NewsRemoteService.dart';
+import 'package:news_app_flutter/data/database/appDataBase.dart';
+import 'package:news_app_flutter/data/news/News.dart';
+import 'package:news_app_flutter/data/news/NewsRemoteService.dart';
+import 'package:news_app_flutter/data/settings/SettingRepository.dart';
+import 'package:news_app_flutter/event/Eventbus.dart';
+import 'package:news_app_flutter/event/events.dart';
+
 
 class NewsRepository {
   NewsRemoteService remoteService;

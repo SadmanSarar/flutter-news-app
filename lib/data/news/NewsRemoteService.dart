@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../URL.dart';
-import 'News.dart';
-import '../../event/Eventbus.dart';
-import '../../event/events.dart';
-import '../settings/SettingRepository.dart';
+import 'package:news_app_flutter/data/URL.dart';
+import 'package:news_app_flutter/data/news/News.dart';
+import 'package:news_app_flutter/data/settings/SettingRepository.dart';
+import 'package:news_app_flutter/event/Eventbus.dart';
+import 'package:news_app_flutter/event/events.dart';
 
 class NewsRemoteService {
   final _eventBust = EventBusProvider.defaultInstance();

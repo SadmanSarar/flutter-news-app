@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 
+import 'package:news_app_flutter/data/settings/SettingRemoteService.dart';
+import 'package:news_app_flutter/data/settings/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'SettingRemoteService.dart';
-import 'User.dart';
 
 class SettingRepository {
   SettingRemoteService remoteService;

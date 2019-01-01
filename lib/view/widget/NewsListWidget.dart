@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../../data/news/News.dart';
-import '../../data/news/NewsRepository.dart';
-import '../../event/Eventbus.dart';
-import '../../event/events.dart';
-import 'NewsListItemWidget.dart';
+import 'package:news_app_flutter/data/news/News.dart';
+import 'package:news_app_flutter/data/news/NewsRepository.dart';
+import 'package:news_app_flutter/event/Eventbus.dart';
+import 'package:news_app_flutter/event/events.dart';
+import 'package:news_app_flutter/view/widget/NewsListItemWidget.dart';
 
 class NewsListWidget extends StatefulWidget {
   final String type;

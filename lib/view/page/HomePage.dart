@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_flutter/event/Eventbus.dart';
+import 'package:news_app_flutter/event/events.dart';
+import 'package:news_app_flutter/view/page/LoginPage.dart';
+import 'package:news_app_flutter/view/widget/CategoryPageWidget.dart';
+import 'package:news_app_flutter/view/widget/DashBoardWidget.dart';
+import 'package:news_app_flutter/view/widget/FavouritePageWidget.dart';
+import 'package:news_app_flutter/view/widget/ProfilePageWidget.dart';
+import 'package:news_app_flutter/view/widget/VideoNewsPageWidget.dart';
 
-import '../widget/CategoryPageWidget.dart';
-import '../widget/DashBoardWidget.dart';
-import '../widget/FavouritePageWidget.dart';
-import '../widget/ProfilePageWidget.dart';
-import '../widget/VideoNewsPageWidget.dart';
-import '../../event/Eventbus.dart';
-import '../../event/events.dart';
-import 'LoginPage.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     'Favourite',
     'Profile',
   ];
+
   Widget viewForIndex(index) {
     if (index >= _children.length) {
       return Text("Not Set");

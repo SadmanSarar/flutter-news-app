@@ -1,7 +1,7 @@
+import 'package:news_app_flutter/data/category/Category.dart';
+import 'package:news_app_flutter/data/news/News.dart';
 import 'package:tinano/tinano.dart';
 import 'dart:async';
-import '../category/Category.dart';
-import '../news/News.dart';
 part 'appDatabase.g.dart'; // this is important!
 
 @TinanoDb(name: "news_app.sqlite", schemaVersion: 2)

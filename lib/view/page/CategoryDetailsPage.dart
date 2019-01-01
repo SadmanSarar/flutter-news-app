@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../widget/NewsListWidget.dart';
-import '../../data/category/Category.dart';
+import 'package:news_app_flutter/data/category/Category.dart';
+import 'package:news_app_flutter/view/widget/NewsListWidget.dart';
 
 class CategoryDetailsPage extends StatelessWidget {
   final Category category;
+
   CategoryDetailsPage(this.category);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

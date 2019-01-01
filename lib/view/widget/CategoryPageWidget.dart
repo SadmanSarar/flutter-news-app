@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_flutter/data/category/Category.dart';
+import 'package:news_app_flutter/data/category/CategoryRepository.dart';
+import 'package:news_app_flutter/view/page/CategoryDetailsPage.dart';
+import 'package:news_app_flutter/view/widget/CategoryItemWidget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-import '../../data/category/Category.dart';
-import '../../data/category/CategoryRepository.dart';
-import '../page/CategoryDetailsPage.dart';
-import 'CategoryItemWidget.dart';
 
 class CategoryPageWidget extends StatefulWidget {
   @override
@@ -19,6 +18,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
 
   List<Category> _list = [];
   CategoryRepository repository = CategoryRepository.create();
+
   _CategoryPageWidgetState();
 
   Future<Null> fetchData() {
@@ -43,6 +43,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
     Colors.green,
     Colors.pink,
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(

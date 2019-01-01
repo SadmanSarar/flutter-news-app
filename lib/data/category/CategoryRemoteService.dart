@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../URL.dart';
-import 'Category.dart';
-import '../../event/Eventbus.dart';
-import '../../event/events.dart';
-import '../settings/SettingRepository.dart';
+import 'package:news_app_flutter/data/URL.dart';
+import 'package:news_app_flutter/data/category/Category.dart';
+import 'package:news_app_flutter/data/settings/SettingRepository.dart';
+import 'package:news_app_flutter/event/Eventbus.dart';
+import 'package:news_app_flutter/event/events.dart';
 
 class CategoryRemoteService {
   final _eventBust = EventBusProvider.defaultInstance();
