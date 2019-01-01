@@ -5,7 +5,9 @@ import '../widget/DashBoardWidget.dart';
 import '../widget/FavouritePageWidget.dart';
 import '../widget/ProfilePageWidget.dart';
 import '../widget/VideoNewsPageWidget.dart';
-
+import '../../event/Eventbus.dart';
+import '../../event/events.dart';
+import 'LoginPage.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -55,6 +57,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    listenForAuthError(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(titleForIndex(_navIndex)),
@@ -91,5 +94,15 @@ class _HomePageState extends State<HomePage> {
       ),
       body: viewForIndex(_navIndex),
     );
+  }
+
+  void listenForAuthError(BuildContext context) {
+    EventBusProvider.defaultInstance().on<AuthErrorEvent>().listen((event) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+      );
+    });
   }
 }
