@@ -140,9 +140,8 @@ class _LoginPageState extends State<LoginPage> {
         _showMessageDialog('Error', value.message);
         return;
       }
-      _gotoNextScreen(context);
+      _gotoNextScreen();
 
-      // _gotoNextScreen(context);
     }).catchError((e, s) {
       print(e);
       Navigator.of(context).pop();
@@ -201,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future _gotoNextScreen(BuildContext context) async {
+  Future _gotoNextScreen() async {
     Widget destination = HomePage();
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(

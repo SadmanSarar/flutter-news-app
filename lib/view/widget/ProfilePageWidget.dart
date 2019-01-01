@@ -114,7 +114,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
           Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(
+                  top: 8.0,
+                  bottom: 8.0,
+                  right: 8.0,
+                  left: 16.0,
+                ),
                 child: ClipOval(
                   child: Image.network(
                     user.image.isEmpty
@@ -145,23 +150,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: RaisedButton(
-                    color: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(4.0),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'Edit',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
               Container(
                 margin: EdgeInsets.only(right: 8.0, top: 8.0, bottom: 8.0),
                 child: Align(
