@@ -1,13 +1,12 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../settings/SettingRepository.dart';
-import '../settings/User.dart';
-import '../URL.dart';
-import '../api/models/Resource.dart';
-import '../../event/Eventbus.dart';
-import '../../event/events.dart';
+import 'package:news_app_flutter/data/URL.dart';
+import 'package:news_app_flutter/data/api/models/Resource.dart';
+import 'package:news_app_flutter/data/settings/SettingRepository.dart';
+import 'package:news_app_flutter/data/settings/User.dart';
+import 'package:news_app_flutter/event/Eventbus.dart';
+import 'package:news_app_flutter/event/events.dart';
 
 class AuthRemoteService {
   SettingRepository settingRepository;
