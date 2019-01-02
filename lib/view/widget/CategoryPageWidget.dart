@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_app_flutter/data/category/Category.dart';
 import 'package:news_app_flutter/data/category/CategoryRepository.dart';
 import 'package:news_app_flutter/view/Routes.dart';
-import 'package:news_app_flutter/view/page/CategoryDetailsPage.dart';
 import 'package:news_app_flutter/view/widget/CategoryItemWidget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -63,6 +62,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
         key: _refreshIndicatorKey,
         onRefresh: fetchData,
         child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+          ),
           height: size.height,
           child: GridView.count(
             crossAxisCount: 3,
