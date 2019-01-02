@@ -2,7 +2,7 @@ import 'package:news_app_flutter/data/category/Category.dart';
 import 'package:news_app_flutter/data/news/News.dart';
 import 'package:tinano/tinano.dart';
 import 'dart:async';
-part 'appDatabase.g.dart'; // this is important!
+part 'appDataBase.g.dart'; // this is important!
 
 @TinanoDb(name: "news_app.sqlite", schemaVersion: 2)
 abstract class AppDatabase {
@@ -63,6 +63,9 @@ abstract class AppDatabase {
 
   @Query('Delete from fav_news where id =:id')
   Future<int> deleteFavNews(int id);
+
+  @Query('Delete from news where id =:id')
+  Future<int> deleteNews(int id);
 
   @Insert(
       "INSERT INTO fav_news (id,title,body,image,categoryId,type,published,publishedAt,categoryName) " +

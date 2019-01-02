@@ -20,7 +20,7 @@ class CategoryItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color,
+      color: Colors.white,
       child: InkWell(
         onTap: () {
           callback(category);
@@ -55,7 +55,7 @@ class CategoryItemWidget extends StatelessWidget {
     return TextStyle(
       fontSize: 23,
       fontWeight: FontWeight.bold,
-      color: Colors.white,
+      color: Colors.black87,
     );
   }
 }

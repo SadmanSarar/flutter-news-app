@@ -42,6 +42,7 @@ class NewsRepository {
     var data = await future;
     var database = await AppDatabase.openMyDatabase();
     data.forEach((item) {
+      database.deleteNews(item.id);
       database.createNews(
         item.id,
         item.title,

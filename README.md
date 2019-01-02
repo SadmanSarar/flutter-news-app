@@ -1,16 +1,27 @@
-# news_app_flutter
+# flutter-news-app
 
-A new Flutter project.
+This project is currently under development.
 
-## Getting Started
+A news app build with Flutter.
 
-This project is a starting point for a Flutter application.
+This project is a demo experimental project aim at finding the best way to organize flutter app projects coming from traditional development environment. 
 
-A few resources to get you started if this is your first Flutter project:
+The app shows news from server. server is hosted [here](http://news-app.sadmansarar.xyz). 
+Your can access the admin panel using
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+```
+email: admin@admin.com
+password: admin
+```
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+For using the app, login using the following credentials.
+
+```
+email: reader@reader.com
+password: reader
+
+```
+Few screenshots
+![](flutter_01.png)
+![](flutter_02.png)
+![](flutter_04.png)

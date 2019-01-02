@@ -65,8 +65,11 @@ class _NewsDetailsPageState extends State<NewsDetailsPage> {
             ),
           ];
         },
-        body: HtmlText(
-          data: _body,
+        body: Container(
+          padding: EdgeInsets.all(8.0),
+          child: HtmlText(
+            data: _body,
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -82,14 +85,6 @@ class _NewsDetailsPageState extends State<NewsDetailsPage> {
               _isFavourite = false;
             });
           }
-          /*
-            FlutterYoutube.playYoutubeVideoByUrl(
-                apiKey: "AIzaSyBLkHuG7jTPvaZl0LLi6aqP6-ypSv2ZCe0",
-                videoUrl: "https://www.youtube.com/watch?v=811aNwrMSEU",
-                autoPlay: true, //default falase
-                fullScreen: true //default false
-                );
-          */
         },
         elevation: 4.0,
         tooltip: 'Make Favourite',

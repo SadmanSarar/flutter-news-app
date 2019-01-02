@@ -1,4 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'appDataBase.dart';
 
 // **************************************************************************
@@ -6,7 +7,7 @@ part of 'appDataBase.dart';
 // **************************************************************************
 
 DatabaseBuilder<AppDatabase> _$createAppDatabase() {
-  return new DatabaseBuilder(new _$AppDatabaseImpl(), "news_app.sqlite", 3);
+  return new DatabaseBuilder(new _$AppDatabaseImpl(), "news_app.sqlite", 2);
 }
 
 class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
@@ -285,6 +286,20 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
 
   Future<int> deleteFavNews(int id) async {
     String sql = "Delete from fav_news where id =?";
+
+    final bindParams_0 = id;
+
+    final bindArgs = [bindParams_0];
+
+    final rows = await database.rawQuery(sql, bindArgs);
+
+    final row = rows.first;
+    int parsedRow = row.values.first as int;
+    return parsedRow;
+  }
+
+  Future<int> deleteNews(int id) async {
+    String sql = "Delete from news where id =?";
 
     final bindParams_0 = id;
 
