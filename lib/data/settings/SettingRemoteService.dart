@@ -14,7 +14,9 @@ class SettingRemoteService {
     var url = URL.addQuery(URL.settings, {
       'api_token': apiToken,
     });
-    final response = await http.get(url);
+    final response = await http.get(url,headers: {
+      'Accept' : 'application/json'
+    });
 
     if (response.statusCode == 200) {
       print(response.body);

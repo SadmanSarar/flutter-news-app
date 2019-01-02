@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:launch_review/launch_review.dart';
-import 'package:news_app_flutter/data/settings/SettingRemoteService.dart';
 import 'package:news_app_flutter/data/settings/SettingRepository.dart';
 import 'package:news_app_flutter/data/settings/User.dart';
 import 'package:news_app_flutter/view/Routes.dart';
-import 'package:news_app_flutter/view/page/PrivacyPolicyPage.dart';
-import 'package:news_app_flutter/view/widget/ChangePasswordDialogWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePageWidget extends StatefulWidget {
@@ -32,7 +29,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    SettingRemoteService().fetchSettings('1234');
+    settings.fetchAndGet();
     return Container(
       padding: EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -52,11 +49,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     "App Terms and Policy",
                     Icons.lock,
                     callback: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PrivacyPolicyPage(),
-                        ),
-                      );
+                      NavigateHelper.navigateToPrivacyPolicyPage(context);
                     },
                   ),
                   new ProfileMenu(
@@ -175,10 +168,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   }
 
   void _showChangePasswordScreen() {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ChangePasswordDialogWIdget(
-              context: context,
-            )));
+    NavigateHelper.navigateToChangePasswordPage(context);
   }
 
   _launchURL(String url) async {

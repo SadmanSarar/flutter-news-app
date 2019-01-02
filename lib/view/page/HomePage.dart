@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_flutter/event/Eventbus.dart';
 import 'package:news_app_flutter/event/events.dart';
-import 'package:news_app_flutter/view/page/LoginPage.dart';
+import 'package:news_app_flutter/view/Routes.dart';
 import 'package:news_app_flutter/view/widget/CategoryPageWidget.dart';
 import 'package:news_app_flutter/view/widget/DashBoardWidget.dart';
 import 'package:news_app_flutter/view/widget/FavouritePageWidget.dart';
@@ -100,11 +100,7 @@ class _HomePageState extends State<HomePage> {
 
   void listenForAuthError(BuildContext context) {
     EventBusProvider.defaultInstance().on<AuthErrorEvent>().listen((event) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => LoginPage(),
-        ),
-      );
+      Navigator.of(context).pushReplacementNamed(ROUTE_PATH[Routes.LOGIN]);
     });
   }
 }

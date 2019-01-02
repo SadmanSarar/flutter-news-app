@@ -15,18 +15,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController passwordController = TextEditingController(text: '');
-
-  @override
-  void initState() {
-    emailController = TextEditingController(text: '');
-    passwordController = TextEditingController(text: '');
-    super.initState();
-  }
+  final AuthRemoteService authRemoteService = AuthRemoteService.create();
 
   @override
   void dispose() {
-    // emailController.dispose();
-    // passwordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -101,13 +95,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final forgotLabel = FlatButton(
-      child: Text(
-        'Forgot password?',
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () {},
-    );
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
       body: Center(
@@ -131,7 +118,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login(BuildContext context) {
-    final AuthRemoteService authRemoteService = AuthRemoteService.create();
     authRemoteService
         .login(emailController.text, passwordController.text)
         .then((value) {

@@ -17,7 +17,7 @@ class SettingRepository {
 
   Future<Null> fetchAndGet() async {
     var future = remoteService.fetchSettings(
-      '1234',
+      await getApiToken(),
     );
     Map<String, String> data = await future;
 

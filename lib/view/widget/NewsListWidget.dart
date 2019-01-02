@@ -103,7 +103,6 @@ class _NewsListState extends State<NewsListWidget> {
           var item = _list[index];
           return new NewsListItemWidget(
             item,
-            (id) {},
           );
         },
       ),

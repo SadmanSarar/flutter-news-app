@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:news_app_flutter/data/URL.dart';
 import 'package:news_app_flutter/data/news/News.dart';
-import 'package:news_app_flutter/view/page/NewsDetailsPage.dart';
+import 'package:news_app_flutter/view/Routes.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 typedef NewsItemCallback = Function(int id);
@@ -12,8 +12,8 @@ class NewsListItemWidget extends StatelessWidget {
   final NewsItemCallback callback;
 
   const NewsListItemWidget(
-    this.news,
-    this.callback, {
+    this.news, {
+    this.callback,
     Key key,
   }) : super(key: key);
 
@@ -23,11 +23,7 @@ class NewsListItemWidget extends StatelessWidget {
         child: Card(
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => NewsDetailsPage(news)),
-          );
-          callback(news.id);
+          NavigateHelper.navigateToNewsDetails(context, news);
         },
         child: Column(
           children: <Widget>[

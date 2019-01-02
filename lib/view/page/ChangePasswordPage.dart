@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_app_flutter/data/api/models/Status.dart';
 import 'package:news_app_flutter/data/auth/AuthRemoteService.dart';
 
-class ChangePasswordDialogWIdget extends StatefulWidget {
-  const ChangePasswordDialogWIdget({
+class ChangePasswordPage extends StatefulWidget {
+  const ChangePasswordPage({
     Key key,
     @required this.context,
   }) : super(key: key);
@@ -11,13 +11,13 @@ class ChangePasswordDialogWIdget extends StatefulWidget {
   final BuildContext context;
 
   @override
-  ChangePasswordDialogWIdgetState createState() {
-    return new ChangePasswordDialogWIdgetState();
+  ChangePasswordPageState createState() {
+    return new ChangePasswordPageState();
   }
 }
 
-class ChangePasswordDialogWIdgetState
-    extends State<ChangePasswordDialogWIdget> {
+class ChangePasswordPageState
+    extends State<ChangePasswordPage> {
   TextEditingController currentPass = TextEditingController(text: '');
   TextEditingController newsPass = TextEditingController(text: '');
   TextEditingController confirmPass = TextEditingController(text: '');
