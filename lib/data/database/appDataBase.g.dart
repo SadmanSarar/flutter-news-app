@@ -47,8 +47,8 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
 
     final rows = await database.rawQuery(sql, bindArgs);
 
-    final row = rows.first;
-    int parsedRow = row.values.first as int;
+    final row = rows.length == 0 ? {} : rows.first;
+    int parsedRow = row.values.length == 0 ? 0 : row.values.first as int;
     return parsedRow;
   }
 
@@ -232,6 +232,29 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
     return parsedRow;
   }
 
+  Future<News> getNewsById(int id) async {
+    String sql = "SELECT * FROM news where id = ?";
+
+    final bindParams_0 = id;
+
+    final bindArgs = [bindParams_0];
+
+    final rows = await database.rawQuery(sql, bindArgs);
+
+    final row = rows.length == 0 ? {} : rows.first;
+    News parsedRow = new News(
+        row["id"] as int,
+        row["title"] as String,
+        row["body"] as String,
+        row["image"] as String,
+        row["categoryId"] as int,
+        row["type"] as String,
+        row["published"] as int,
+        row["publishedAt"] as String,
+        row["categoryName"] as String);
+    return parsedRow;
+  }
+
   Future<int> deleteAllNews() async {
     String sql = "Delete from news";
 
@@ -307,8 +330,8 @@ class _$AppDatabaseImpl extends AppDatabase implements GeneratedDatabaseImpl {
 
     final rows = await database.rawQuery(sql, bindArgs);
 
-    final row = rows.first;
-    int parsedRow = row.values.first as int;
+    final row = rows.length == 0 ? {} : rows.first;
+    int parsedRow = row.values.length == 0 ? 0 : row.values.first as int;
     return parsedRow;
   }
 
