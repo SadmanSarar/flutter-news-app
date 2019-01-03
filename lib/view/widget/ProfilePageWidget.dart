@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:news_app_flutter/data/URL.dart';
 import 'package:news_app_flutter/data/settings/SettingRepository.dart';
 import 'package:news_app_flutter/data/settings/User.dart';
 import 'package:news_app_flutter/view/Routes.dart';
@@ -115,7 +116,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                   child: Image.network(
                     user.image.isEmpty
                         ? 'https://picsum.photos/200/200'
-                        : user.image,
+                        : URL.imageUrl(user.image),
                     height: 56,
                     width: 56,
                   ),

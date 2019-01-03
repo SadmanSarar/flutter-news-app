@@ -41,9 +41,12 @@ class CategoryItemWidget extends StatelessWidget {
                 width: 120,
               ),
             ),
-            Text(
-              category.name,
-              style: buildHeadline(context),
+            Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Text(
+                category.name,
+                style: buildHeadline(context),
+              ),
             )
           ],
         ),
@@ -53,7 +56,7 @@ class CategoryItemWidget extends StatelessWidget {
 
   TextStyle buildHeadline(BuildContext context) {
     return TextStyle(
-      fontSize: 23,
+      fontSize: 18,
       fontWeight: FontWeight.bold,
       color: Colors.black87,
     );

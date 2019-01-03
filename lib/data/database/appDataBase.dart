@@ -42,9 +42,11 @@ abstract class AppDatabase {
   @Query("SELECT * FROM fav_news")
   Future<List<News>> getFavNews();
 
-   @Query("SELECT * FROM fav_news where id = :id")
-  Future <News> getFavNewsById(int id);
+  @Query("SELECT * FROM fav_news where id = :id")
+  Future<News> getFavNewsById(int id);
 
+  @Query("SELECT * FROM news where id = :id")
+  Future<News> getNewsById(int id);
   @Query('Delete from news')
   Future<int> deleteAllNews();
 
@@ -67,10 +69,8 @@ abstract class AppDatabase {
   @Query('Delete from news where id =:id')
   Future<int> deleteNews(int id);
 
-  @Insert(
-      "INSERT INTO fav_news (id,title,body,image,categoryId,type,published,publishedAt,categoryName) " +
-      "VALUES (:id,:title,:body,:image,:categoryId,:type,:published,:publishedAt,:categoryName)"
-      )
+  @Insert("INSERT INTO fav_news (id,title,body,image,categoryId,type,published,publishedAt,categoryName) " +
+      "VALUES (:id,:title,:body,:image,:categoryId,:type,:published,:publishedAt,:categoryName)")
   Future<int> createFavNews(
       int id,
       String title,
@@ -100,7 +100,6 @@ abstract class AppDatabase {
           `publishedAt` TEXT NULL,
           `categoryName` TEXT NULL
           );""");
-    }).addMigration(1, 2, (db) async {
       await db.execute("""
         CREATE TABLE `fav_news` ( 
           `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 

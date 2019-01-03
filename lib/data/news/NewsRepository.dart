@@ -41,8 +41,11 @@ class NewsRepository {
   fetchNews(Future<List<News>> future, String type, String categoryId) async {
     var data = await future;
     var database = await AppDatabase.openMyDatabase();
-    data.forEach((item) {
+    data.forEach((item) async {
+      var _news = await database.getNewsById(item.id);
+      if(_news != null){
       database.deleteNews(item.id);
+      }
       database.createNews(
         item.id,
         item.title,

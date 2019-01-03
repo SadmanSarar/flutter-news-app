@@ -87,10 +87,21 @@ class _NewsListState extends State<NewsListWidget> {
       return buildEmptyView();
     }
     if (_loading) {
-      return buildListView();
+      return _buildOnlyLoadingView();
     }
 
     return buildListView();
+  }
+
+  Container _buildOnlyLoadingView() {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      alignment: Alignment.center,
+      child: Container(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 
   Widget buildListView() {

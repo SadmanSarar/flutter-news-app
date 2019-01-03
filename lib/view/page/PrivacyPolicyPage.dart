@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:news_app_flutter/data/settings/SettingRepository.dart';
+import 'package:flutter_html_view/flutter_html_view.dart';
 
 class PrivacyPolicyPage extends StatefulWidget {
   @override
@@ -34,14 +35,19 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Privacy Policy"),
-      ),
-      body: HtmlText(
-        data: (_privacyPolicy == null || _privacyPolicy.isEmpty)
-            ? '<h3>Not available</h3>'
-            : _privacyPolicy,
-      ),
-    );
+        appBar: AppBar(
+          title: Text("Privacy Policy"),
+        ),
+        body: SingleChildScrollView(
+          child: HtmlView(
+            data: (_privacyPolicy == null || _privacyPolicy.isEmpty)
+                ? '<h3>Not available</h3>'
+                : _privacyPolicy,
+            baseURL: "",
+            onLaunchFail: () {
+              print('Failed');
+            },
+          ),
+        ));
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:news_app_flutter/data/URL.dart';
 import 'package:news_app_flutter/data/news/News.dart';
 import 'package:news_app_flutter/data/news/NewsRepository.dart';
+import 'package:flutter_html_view/flutter_html_view.dart';
 
 class NewsDetailsPage extends StatefulWidget {
   final News news;
@@ -51,11 +52,29 @@ class _NewsDetailsPageState extends State<NewsDetailsPage> {
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(_title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                    )),
+                title: Padding(
+                  padding: EdgeInsets.only(
+                    top: 16.0,
+                    left: 48.0,
+                    right: 16.0,
+                    bottom: 0.0,
+                  ),
+                  child: SizedBox.fromSize(
+                    size: Size(
+                      MediaQuery.of(context).size.width * 0.7,
+                      20.0,
+                    ),
+                    child: Text(
+                      _title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.clip,
+                    ),
+                  ),
+                ),
                 background: Image.network(
                   _imgUrl,
                   fit: BoxFit.cover,
@@ -65,10 +84,12 @@ class _NewsDetailsPageState extends State<NewsDetailsPage> {
             ),
           ];
         },
-        body: Container(
-          padding: EdgeInsets.all(8.0),
-          child: HtmlText(
-            data: _body,
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            child: HtmlView(
+              data: _body,
+            ),
           ),
         ),
       ),
